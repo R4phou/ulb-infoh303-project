@@ -96,7 +96,7 @@ Dossier patient permet au professionel d'accéder aux infos d'un patient
 - Manque un lien entre pathologie et spécialisation/systeme anatomique
 - Medicament
   - L'attribut Clé devrait être le nom du produit et non le DCI --> ex dafalgan et efferalgan on la meme DCI
-
+- Attribut adresse mail et tel non obligatoire (0,1)
 
 
 
