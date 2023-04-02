@@ -1,0 +1,14 @@
+Liens: 
+
+- Schéma ER: https://drive.google.com/file/d/1EY6zpli7nDDFRm-1vhLvtrn7uamu1e9f/view?usp=sharing
+
+
+TO DO: à déposer sur l'UV pour le 5 avril
+- Rapport
+
+- Diagramme entité association
+- Contraintes
+
+- Traduction relationnelle du diagramme et des contraintes
+
+- Hypothèses et justification des choix de modélisation
