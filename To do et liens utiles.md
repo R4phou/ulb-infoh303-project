@@ -78,5 +78,25 @@ Dossier patient permet au professionel d'accéder aux infos d'un patient
 - Pharmacien choisit le conditionnement le plus petit pour couvrir la durée du traitement
 
 
+# Remarques sur le schéma actuel
+- héritage pas la bonne flèche
+- manque les cardinalités
+- manque les généralisations dans l'héritage
+- manque une entité: Prescription
+- Renommer Dossier par DossierPatient ou créer une nouvelle entité DossierPatient
+- Association **réfère** triple
+  - jsp si c'est ok pck un medecin se réfere pas forcément à un pharmacien
+  - quid des cardinalités
+- Ne parle pas du système atomique
+  - Créer une entité faible?
+  - voir slide 8 du tp2
+- Créer une entité pathologie?
+  - Avec date de diagnostic
+  - Associée à la spécialisation
+- Manque un lien entre pathologie et spécialisation/systeme anatomique
+- Medicament
+  - L'attribut Clé devrait être le nom du produit et non le DCI --> ex dafalgan et efferalgan on la meme DCI
+
+
 
 
