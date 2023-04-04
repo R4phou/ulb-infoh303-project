@@ -1,0 +1,27 @@
++-------------------+          +----------------------+          +------------------------+
+|       Patient     |          |       Pathologie      |          |         Médicament      |
++-------------------+          +----------------------+          +------------------------+
+| - nom             |          | - nom                 |          | - DCI                   |
+| - prénom          |          | - système anatomique  |          | - nom commercial        |
+| - genre           |          +----------------------+          | - conditionnement       |
+| - date de naissance|          |                      |          +------------------------+
+| - NISS            |          |                      |
+| - adresse mail    |          +----------------------+
+| - numéro de téléphone|        |    Prescrire         |
+| - médecin de référence |      +----------------------+
+| - pharmacien de référence |  | - durée de traitement |
++-------------------+          | - date de prescription|
+                               | - médecin prescripteur|
+                               | - pharmacien délivrant|
+                               | - médicament prescrit |
+                               | - patient concerné    |
+                               +-----------------------+
+ 
++-------------------+          +----------------------+          +------------------------+
+|       Médecin      |          |       Pharmacie       |          |       Spécialité        |
++-------------------+          +----------------------+          +------------------------+
+| - nom             |          | - nom                 |          | - nom                   |
+| - numéro INAMI    |          | - numéro de téléphone |          +------------------------+
+| - adresse mail    |          +----------------------+          | - système anatomique   |
+| - spécialité      |                                           +------------------------+
++-------------------+ 
