@@ -1,9 +1,10 @@
 
-# Liens:
+# Liens
 
-- Schéma ER: https://drive.google.com/file/d/1EY6zpli7nDDFRm-1vhLvtrn7uamu1e9f/view?usp=sharing
+- Schéma ER: <https://drive.google.com/file/d/1EY6zpli7nDDFRm-1vhLvtrn7uamu1e9f/view?usp=sharing>
 
 # TO DO
+
 ## A déposer sur l'UV pour le 5 avril
 
 - Rapport
@@ -15,8 +16,11 @@
   - Hypothèses et justification des choix de modélisation
 
 # Résumé du texte
+
 Dossier patient permet au professionel d'accéder aux infos d'un patient
+
 ## Entités
+
 - Patient
   - **Numéro d'identification (NISS)**
   - Permet de l'identifier dans les procédures liées à la sécurité sociale
@@ -33,7 +37,6 @@ Dossier patient permet au professionel d'accéder aux infos d'un patient
   - **Numéro INAMI**
   - Numéro de téléphone
   - Adresse mail
-
 
 - Médecin
 
@@ -52,7 +55,6 @@ Dossier patient permet au professionel d'accéder aux infos d'un patient
   - Nom de molécule active (DCI)
   - Conditionnement (nombre de comprimés dans la boîte)
 
-
 - Traitement
   - Plusieurs Médicaments (1, n)
   - Nom prescripteur (NomP)
@@ -61,8 +63,8 @@ Dossier patient permet au professionel d'accéder aux infos d'un patient
   - Date de début
   - Durée
 
-
 ## Relations
+
 - Patient a un dossierPatient
 - Patient a un médecin (contact en cas de problème)
 - Paritent a un pharmacien de référence (contact en cas de problèmes)
@@ -73,12 +75,14 @@ Dossier patient permet au professionel d'accéder aux infos d'un patient
 - Médecin fait une Prescription
 - Pharmacien lié à Médicament via Prescription
 - Patient a un Traitement
-## Contraintes 
+
+## Contraintes
+
 - INAMI et nom du médecin dans prescription
 - Pharmacien choisit le conditionnement le plus petit pour couvrir la durée du traitement
 
-
 # Remarques sur le schéma actuel
+
 - héritage pas la bonne flèche
 - manque les cardinalités
 - manque les généralisations dans l'héritage
@@ -97,6 +101,3 @@ Dossier patient permet au professionel d'accéder aux infos d'un patient
 - Medicament
   - L'attribut Clé devrait être le nom du produit et non le DCI --> ex dafalgan et efferalgan on la meme DCI
 - Attribut adresse mail et tel non obligatoire (0,1)
-
-
-
