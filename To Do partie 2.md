@@ -1,10 +1,10 @@
 # To do
 
-## Création
+## Création --> Raph et Alex et Nico
 
 Déduire de notre modèle relationnel un script SQL DDL de création de la base de données et de ses différentes tables ainsi que de créer cette base de données.
 
-## Initialisation
+## Initialisation --> Alex et Nico
 
 Ecrire un script permettant d'importer dans la base de données les données présentes dans les fichiers fournis sur l'UV. Ces données doivent être présente dans la base de données pour la défense orale.
 
