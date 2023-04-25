@@ -31,3 +31,23 @@ Il doit être possible de visualiser les résultats dans votre application.
   - Répondre aux questions
 - Outils et langages de notre choix: MySQL, PostgreSQL, Python, PHP, Java
 - PAS SQLite!
+
+
+# à Modifier sur le schéma:
+
+- diagnostic doit prendre un patient et non un médecin
+- Médicament doit agir sur un système anatomique
+- Systeme anatomique doit comprendre le nom commercial des médicament qui agissent dessus
+
+## Mapping actuel:
+
+Correspondance entre les fichiers et les tables actuelles:
+
+- diagnostiques.xml -> Diagnostic
+- dossier_patient.csv -> Prescription + Traitement + Medicament
+- medecins.xml -> Medecin
+- medicaments.csv -> Medicament
+- pathologies.csv -> Pathologie
+- patients.xml -> Patient
+- pharmacies.xml -> Pharmacien
+- specialites.xml -> SystemeAnatomique
