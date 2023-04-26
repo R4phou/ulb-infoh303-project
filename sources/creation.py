@@ -6,40 +6,118 @@ db = mysql.connector.connect(
     user="root",
     # password="ZQ$G7ZWr;b|rD]B",
     passwd="root",
-    database="testdb"
 )
 
 
-print("Successfully connected to MySQL database 'testdb'")
+print("Successfully connected to MySQL")
 
 # Créer le curseur qui permet de faire des queries et commandes SQL
-mycursor = db.cursor()
+c = db.cursor()
 
-# Créer une base de données (à ne faire qu'une fois la première fois qu'on run le code)
+# Supprimer la base de données si elle existe
+c.execute("DROP DATABASE IF EXISTS systeme_medical")
 
-# mycursor.execute("CREATE DATABASE testdb")
-# print("Successfully created database 'testdb'")
+# Créer la base de données
+c.execute("CREATE DATABASE systeme_medical")
+
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    # password="ZQ$G7ZWr;b|rD]B",
+    passwd="root",
+    database="systeme_medical"
+)
+
+c = db.cursor()
+
+query = """CREATE TABLE Patient 
+    (NISS INT PRIMARY KEY,
+    Lname VARCHAR(50) NOT NULL,
+    Fname VARCHAR(50) NOT NULL,
+    Bdate DATE NOT NULL,
+    Email VARCHAR(50),
+    Phone INT)"""
+c.execute(query)
+print("Table Patient created successfully")
 
 
-"""Basic queries and commands"""
+query = """CREATE TABLE Medecin
+    (
+    INAMI INT PRIMARY KEY,
+    Lname VARCHAR(50) NOT NULL,
+    Email VARCHAR(50),
+    Phone INT,
+    Speciality VARCHAR(50)
+    )
+"""
+c.execute(query)
+print("Table Medecin created successfully")
 
 
-# Création d'une table avec 3 colonnes (name, age, personID)
-# mycursor.execute(
-#     "CREATE TABLE Person (name VARCHAR(50), age smallint UNSIGNED, personID int PRIMARY KEY AUTO_INCREMENT)")
-# AUTO_INCREMENT permet d'incrémenter automatiquement la valeur de la colonne personID (éviter d'avoir 2 fois la même)
+query = """CREATE TABLE Pharmacien
+    (INAMI INT PRIMARY KEY,
+    Lname VARCHAR(50) NOT NULL,
+    Email VARCHAR(50),
+    Phone INT)
+"""
+c.execute(query)
+print("Table Pharmacien created successfully")
 
 
-# Ajout d'informations dans la table Person
-mycursor.execute(
-    "INSERT INTO Person (name, age) VALUES (%s, %s)", ("Tim", 91))
-db.commit()  # Commit les changements dans la base de données
+query = """CREATE TABLE Medicament
+    (
+    NameMedicament VARCHAR(50) PRIMARY KEY,
+    DCI VARCHAR(50) NOT NULL,
+    Quantity INT NOT NULL)
+"""
+c.execute(query)
+print("Table Medicament created successfully")
 
 
-# Visualiser les données de la table Person
-mycursor.execute("SELECT * FROM Person")
+query = """CREATE TABLE AnatSystem
+    (NameAnatSystem VARCHAR(50) PRIMARY KEY)
+"""
+c.execute(query)
+print("Table AnatSystem created successfully")
+
+query = """CREATE TABLE Pathologie
+    (
+    NamePathologie VARCHAR(50) PRIMARY KEY,
+    FOREIGN KEY(NameAnatSystem) REFERENCES AnatSystem(NameAnatSystem))
+"""
+c.execute(query)
+print("Table Pathologie created successfully")
+
+# query = """CREATE TABLE Traitement
+#     (
+#     NameTrait VARCHAR(50) PRIMARY KEY,
+#     DateBegin DATE NOT NULL,
+#     Duration INT NOT NULL,
+#     FOREIGN KEY (NISS) REFERENCES Patient(NISS))
+# """
+# c.execute(query)
+# print("Table Traitement created successfully")
 
 
-# mycursor.execute("DESCRIBE Person")
-for x in mycursor:
-    print(x)
+# query = """CREATE TABLE TraitementPathologie
+#     (
+#     FOREIGN KEY (NameTrait) REFERENCES Traitement(NameTrait),
+#     FOREIGN KEY (NamePath) REFERENCES Pathologie(NamePathologie))
+# """
+# c.execute(query)
+# print("Table TraitementPathologie created successfully")
+
+# query = """CREATE TABLE Diagnostic
+#     (FOREIGN KEY (NISS) REFERENCES Patient(NISS),
+#     FOREIGN KEY (NomPathologie) REFERENCES Pathologie(NomPathologie),
+#     FOREIGN KEY (NomTraitement) REFERENCES Traitement(NomPathologie),
+#     DiagnosticDate DATE NOT NULL)
+# """
+# c.execute(query)
+# print("Table Diagnostic created successfully")
+
+
+# Fermeture de la connexion
+db.commit()
+c.close()
+db.close()
