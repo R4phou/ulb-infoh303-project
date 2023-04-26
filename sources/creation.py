@@ -83,38 +83,45 @@ print("Table AnatSystem created successfully")
 query = """CREATE TABLE Pathologie
     (
     NamePathologie VARCHAR(50) PRIMARY KEY,
+    NameAnatSystem VARCHAR(50) NOT NULL,
     FOREIGN KEY(NameAnatSystem) REFERENCES AnatSystem(NameAnatSystem))
 """
 c.execute(query)
 print("Table Pathologie created successfully")
 
-# query = """CREATE TABLE Traitement
-#     (
-#     NameTrait VARCHAR(50) PRIMARY KEY,
-#     DateBegin DATE NOT NULL,
-#     Duration INT NOT NULL,
-#     FOREIGN KEY (NISS) REFERENCES Patient(NISS))
-# """
-# c.execute(query)
-# print("Table Traitement created successfully")
+query = """CREATE TABLE Traitement
+    (
+    NameTrait VARCHAR(50) PRIMARY KEY,
+    DateBegin DATE NOT NULL,
+    Duration INT NOT NULL,
+    NISSPatient INT NOT NULL,
+    FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS))
+"""
+c.execute(query)
+print("Table Traitement created successfully")
 
 
-# query = """CREATE TABLE TraitementPathologie
-#     (
-#     FOREIGN KEY (NameTrait) REFERENCES Traitement(NameTrait),
-#     FOREIGN KEY (NamePath) REFERENCES Pathologie(NamePathologie))
-# """
-# c.execute(query)
-# print("Table TraitementPathologie created successfully")
+query = """CREATE TABLE TraitementPathologie
+    (
+    NameTrait VARCHAR(50) NOT NULL,
+    NamePath VARCHAR(50) NOT NULL,
+    FOREIGN KEY (NameTrait) REFERENCES Traitement(NameTrait),
+    FOREIGN KEY (NamePath) REFERENCES Pathologie(NamePathologie))
+"""
+c.execute(query)
+print("Table TraitementPathologie created successfully")
 
-# query = """CREATE TABLE Diagnostic
-#     (FOREIGN KEY (NISS) REFERENCES Patient(NISS),
-#     FOREIGN KEY (NomPathologie) REFERENCES Pathologie(NomPathologie),
-#     FOREIGN KEY (NomTraitement) REFERENCES Traitement(NomPathologie),
-#     DiagnosticDate DATE NOT NULL)
-# """
-# c.execute(query)
-# print("Table Diagnostic created successfully")
+query = """CREATE TABLE Diagnostic
+    (NISSPatient INT NOT NULL,
+    NomPathologie VARCHAR(50) NOT NULL,
+    NomTraitement VARCHAR(50) NOT NULL,
+    FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS),
+    FOREIGN KEY (NomPathologie) REFERENCES Pathologie(NamePathologie),
+    FOREIGN KEY (NomTraitement) REFERENCES Traitement(NameTrait),
+    DiagnosticDate DATE NOT NULL)
+"""
+c.execute(query)
+print("Table Diagnostic created successfully")
 
 
 # Fermeture de la connexion
