@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request #pip install flask
 
 app = Flask(__name__)
 
