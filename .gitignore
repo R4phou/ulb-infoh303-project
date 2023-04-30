@@ -3,3 +3,4 @@ interface/static/scss
 interface/static/node_modules
 interface/static/package-lock.json
 interface/static/package.json
+**/_pycache__/*
