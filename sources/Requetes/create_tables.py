@@ -1,12 +1,15 @@
 #Définition des requêtes de création des tables
 
+#Les numéros inami sont mis en VARCHAR car les valeurs sont supérieures à 2^32
 patient_query = """CREATE TABLE Patient 
-    (NISS INT PRIMARY KEY,
+    (NISS VARCHAR(50) PRIMARY KEY,
     Lname VARCHAR(50) NOT NULL,
     Fname VARCHAR(50) NOT NULL,
     Bdate DATE NOT NULL,
     Email VARCHAR(50),
-    Phone INT)"""
+    Phone VARCHAR(50),
+    INAMImed VARCHAR(50) NOT NULL,
+    INAMIphar VARCHAR(50) NOT NULL)"""
 
 medecin_query = """CREATE TABLE Medecin
     (
@@ -47,7 +50,7 @@ traitement_query = """CREATE TABLE Traitement
     NameTrait VARCHAR(50) PRIMARY KEY,
     DateBegin DATE NOT NULL,
     Duration INT NOT NULL,
-    NISSPatient INT NOT NULL,
+    NISSPatient VARCHAR(50) NOT NULL,
     FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS))
 """
 traitement_pathologie_query = """CREATE TABLE TraitementPathologie
@@ -58,7 +61,7 @@ traitement_pathologie_query = """CREATE TABLE TraitementPathologie
     FOREIGN KEY (NamePath) REFERENCES Pathologie(NamePathologie))
 """
 diagnostic_query = """CREATE TABLE Diagnostic
-    (NISSPatient INT NOT NULL,
+    (NISSPatient VARCHAR(50) NOT NULL,
     NomPathologie VARCHAR(50) NOT NULL,
     NomTraitement VARCHAR(50) NOT NULL,
     FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS),

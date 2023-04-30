@@ -4,3 +4,5 @@ interface/static/node_modules
 interface/static/package-lock.json
 interface/static/package.json
 **/_pycache__/*
+sources/Requetes/__pycache__/create_tables.cpython-310.pyc
+sources/__pycache__/utiles.cpython-310.pyc
