@@ -22,6 +22,8 @@ def insert_data(table,parameters,values):
     query = "INSERT INTO " + table +str(""+str(tuple(parameters)).replace("'",'')) +" VALUES (" + values_to_str(list(values))+");"
     execute_query(cursor,query)
 
+
+
 #Ajoute les données de Patient.xml dans la table Patient
 def copy_patients_to_db():
     root = load_xml_file("Données/patient.xml")
@@ -33,7 +35,7 @@ def copy_patients_to_db():
         values['Bdate'] = format_to_date(birth_date)
         insert_data("Patient",values.keys(),values.values())
 
-#Ajoute les données de Patient.xml dans la table Patient
+#Ajoute les données de medecins.xml dans la table Patient
 def copy_medecins_to_db():
     root = load_xml_file("Données/medecins.xml")
     for data in root:
@@ -42,9 +44,29 @@ def copy_medecins_to_db():
         values = {MEDECIN_NODE_MAPPING[k]:medecin[k] for k in MEDECIN_NODE_MAPPING.keys() if k in medecin and medecin[k] != 'NULL'}
         insert_data("Medecin",values.keys(),values.values())
 
+#Ajoute les données de pharmaciens.xml dans la table Patient
+def copy_pharmaciens_to_db():
+    root = load_xml_file("Données/pharmaciens.xml")
+    for data in root:
+        pharmacien = get_data_as_dictionary(data)
+        #Réordonne les données selon le mapping de la table Patient
+        values = {PHARMACIEN_NODE_MAPPING[k]:pharmacien[k] for k in PHARMACIEN_NODE_MAPPING.keys() if k in pharmacien and pharmacien[k] != 'NULL'}
+        insert_data("Pharmacien",values.keys(),values.values())
+
+#Ajoute les données de pharmaciens.xml dans la table Patient
+def copy_diagnostiques_to_db():
+    root = load_xml_file("Données/diagnostiques.xml")
+    for data in root:
+        pharmacien = get_data_as_dictionary(data)
+        #Réordonne les données selon le mapping de la table Patient
+        values = {PHARMACIEN_NODE_MAPPING[k]:pharmacien[k] for k in PHARMACIEN_NODE_MAPPING.keys() if k in pharmacien and pharmacien[k] != 'NULL'}
+        insert_data("Pharmacien",values.keys(),values.values())
+
+
 
 if __name__ == "__main__":
     reset_all_tables()
     copy_patients_to_db()
     copy_medecins_to_db()
+    copy_pharmaciens_to_db()
     close_db(db,cursor)
