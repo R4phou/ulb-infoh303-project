@@ -28,48 +28,63 @@ pharmacien_query = """CREATE TABLE Pharmacien
     Phone VARCHAR(50))
 """
 
-medicament_query = """CREATE TABLE Medicament
+speciality_query = """CREATE TABLE SpecSystAnat
     (
-    NameMedicament VARCHAR(50) PRIMARY KEY,
-    DCI VARCHAR(50) NOT NULL,
-    Quantity INT NOT NULL)
+    NomSpec VARCHAR(50) NOT NULL,
+    NomSystAnat VARCHAR(50) NOT NULL,
+    FOREIGN KEY (NomSpec) REFERENCES Medecin(Speciality))
 """
 
-anat_system_query = """CREATE TABLE AnatSystem
-    (NameAnatSystem VARCHAR(50) PRIMARY KEY)
+medicament_query = """CREATE TABLE Medicament
+    (
+    DCI VARCHAR(50) PRIMARY KEY,
+    NomCom VARCHAR(50) NOT NULL,
+    systAnat VARCHAR(100) NOT NULL,
+    Conditionnement INT NOT NULL,
+    FOREIGN KEY (systAnat) REFERENCES SpecSystAnat(NomSystAnat))
 """
 
 pathologie_query = """CREATE TABLE Pathologie
     (
-    NamePathologie VARCHAR(50) PRIMARY KEY,
-    NameAnatSystem VARCHAR(50) NOT NULL,
-    FOREIGN KEY(NameAnatSystem) REFERENCES AnatSystem(NameAnatSystem))
+    NomPath VARCHAR(50) PRIMARY KEY,
+    NomSpec VARCHAR(50) NOT NULL,
+    FOREIGN KEY (NomSpec) REFERENCES SpecSystAnat(NomSpec))
 """
-traitement_query = """CREATE TABLE Traitement
-    (
-    NameTrait VARCHAR(50) PRIMARY KEY,
-    DateBegin DATE NOT NULL,
-    Duration INT NOT NULL,
-    NISSPatient BIGINT NOT NULL,
-    FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS))
-"""
-traitement_pathologie_query = """CREATE TABLE TraitementPathologie
-    (
-    NameTrait VARCHAR(50) NOT NULL,
-    NamePath VARCHAR(50) NOT NULL,
-    FOREIGN KEY (NameTrait) REFERENCES Traitement(NameTrait),
-    FOREIGN KEY (NamePath) REFERENCES Pathologie(NamePathologie))
-"""
+
 diagnostic_query = """CREATE TABLE Diagnostic
-    (NISSPatient BIGINT NOT NULL,
+    (
+    NISSPatient BIGINT NOT NULL,
+    BirthDate DATE NOT NULL,
+    date DATE NOT NULL,
+    NomSpec VARCHAR(50) NOT NULL,
     NomPathologie VARCHAR(50) NOT NULL,
-    NomTraitement VARCHAR(50) NOT NULL,
     FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS),
+    FOREIGN KEY (NomSpec) REFERENCES Specialite(NomSpec),
     FOREIGN KEY (NomPathologie) REFERENCES Pathologie(NamePathologie),
-    FOREIGN KEY (NomTraitement) REFERENCES Traitement(NameTrait),
-    DiagnosticDate DATE NOT NULL)
+    FOREIGN KEY (BirthDate) REFERENCES Patient(Bdate))
+"""
+
+dossier_patient_query = """CREATE TABLE DossierPatient
+    (
+    NISSPatient BIGINT NOT NULL,
+    NomMed VARCHAR(50) NOT NULL,
+    NomPhar VARCHAR(50) NOT NULL,
+    InamiMed BIGINT NOT NULL,
+    InamiPhar BIGINT NOT NULL,
+    NomComMedicament VARCHAR(50) NOT NULL,
+    DCI VARCHAR(50) NOT NULL,
+    datePrescription DATE NOT NULL,
+    dateVente DATE NOT NULL,
+    dureeTraitement INT NOT NULL,
+    FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS),
+    FOREIGN KEY (NomMed) REFERENCES Medecin(Lname),
+    FOREIGN KEY (NomPhar) REFERENCES Pharmacien(Lname),
+    FOREIGN KEY (InamiMed) REFERENCES Medecin(INAMI),
+    FOREIGN KEY (InamiPhar) REFERENCES Pharmacien(INAMI),
+    FOREIGN KEY (NomComMedicament) REFERENCES Medicament(NomCom),
+    FOREIGN KEY (DCI) REFERENCES Medicament(DCI))
 """
 
 #Permet de récupérer les requêtes sous forme de liste.
 def get_table_creation_queries():
-    return [patient_query,medecin_query,pharmacien_query,medicament_query,anat_system_query,pathologie_query,traitement_query,traitement_pathologie_query,diagnostic_query]
+    return [patient_query,medecin_query,pharmacien_query,medicament_query,speciality_query,pathologie_query,diagnostic_query,dossier_patient_query]

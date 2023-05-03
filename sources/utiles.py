@@ -12,6 +12,7 @@ PATIENT_NODE_MAPPING ={
     'inami_medecin':'INAMImed', 
     'inami_pharmacien':'INAMIphar'
 }
+
 # Ordre d'insertion des données du médecin dans la base de données
 MEDECIN_NODE_MAPPING ={
     'inami': 'INAMI',
@@ -20,6 +21,23 @@ MEDECIN_NODE_MAPPING ={
     'telephone':'Phone', 
     'specialite':'Speciality'
 }
+
+# Ordre d'insertion des données du pharmacien dans la base de données
+PHARMACIEN_NODE_MAPPING ={
+    'inami': 'INAMI',
+    'nom':'Lname',
+    'mail':'Email',
+    'tel':'Phone'
+}
+
+# Ordre d'insertion des données du diagnostique dans la base de données
+DIAGNOSTIQUE_NODE_MAPPING ={
+    'inami': 'INAMI',
+    'nom':'Lname',
+    'mail':'Email',
+    'tel':'Phone'
+}
+
 
 
 """Exécute une seule requête SQL et renvoie son résultat"""
