@@ -2,30 +2,30 @@
 
 #Les numéros inami sont mis en VARCHAR car les valeurs sont supérieures à 2^32
 patient_query = """CREATE TABLE Patient 
-    (NISS VARCHAR(50) PRIMARY KEY,
+    (NISS BIGINT PRIMARY KEY,
     Lname VARCHAR(50) NOT NULL,
     Fname VARCHAR(50) NOT NULL,
     Bdate DATE NOT NULL,
     Email VARCHAR(50),
     Phone VARCHAR(50),
-    INAMImed VARCHAR(50) NOT NULL,
-    INAMIphar VARCHAR(50) NOT NULL)"""
+    INAMImed BIGINT NOT NULL,
+    INAMIphar BIGINT NOT NULL)"""
 
 medecin_query = """CREATE TABLE Medecin
     (
-    INAMI INT PRIMARY KEY,
+    INAMI BIGINT PRIMARY KEY,
     Lname VARCHAR(50) NOT NULL,
     Email VARCHAR(50),
-    Phone INT,
+    Phone VARCHAR(50),
     Speciality VARCHAR(50)
     )
 """
 
 pharmacien_query = """CREATE TABLE Pharmacien
-    (INAMI INT PRIMARY KEY,
+    (INAMI BIGINT PRIMARY KEY,
     Lname VARCHAR(50) NOT NULL,
     Email VARCHAR(50),
-    Phone INT)
+    Phone VARCHAR(50))
 """
 
 medicament_query = """CREATE TABLE Medicament
@@ -50,7 +50,7 @@ traitement_query = """CREATE TABLE Traitement
     NameTrait VARCHAR(50) PRIMARY KEY,
     DateBegin DATE NOT NULL,
     Duration INT NOT NULL,
-    NISSPatient VARCHAR(50) NOT NULL,
+    NISSPatient BIGINT NOT NULL,
     FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS))
 """
 traitement_pathologie_query = """CREATE TABLE TraitementPathologie
@@ -61,7 +61,7 @@ traitement_pathologie_query = """CREATE TABLE TraitementPathologie
     FOREIGN KEY (NamePath) REFERENCES Pathologie(NamePathologie))
 """
 diagnostic_query = """CREATE TABLE Diagnostic
-    (NISSPatient VARCHAR(50) NOT NULL,
+    (NISSPatient BIGINT NOT NULL,
     NomPathologie VARCHAR(50) NOT NULL,
     NomTraitement VARCHAR(50) NOT NULL,
     FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS),

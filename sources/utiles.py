@@ -1,7 +1,7 @@
 import mysql.connector as mysql
 import xml.etree.ElementTree as etree
 
-# Ordre d'insertion du patient dans la base de données
+# Ordre d'insertion des données du patient dans la base de données
 PATIENT_NODE_MAPPING ={
     'NISS': 'NISS',
     'nom':'Lname',
@@ -11,6 +11,14 @@ PATIENT_NODE_MAPPING ={
     'telephone':'Phone',
     'inami_medecin':'INAMImed', 
     'inami_pharmacien':'INAMIphar'
+}
+# Ordre d'insertion des données du médecin dans la base de données
+MEDECIN_NODE_MAPPING ={
+    'inami': 'INAMI',
+    'nom':'Lname',
+    'mail':'Email',
+    'telephone':'Phone', 
+    'specialite':'Speciality'
 }
 
 
@@ -66,7 +74,7 @@ Récupère le contenu du fichier XML et le renvoie sous forme d'objet ElementTre
 Returns: la racine de l'arbre XML
 """
 def load_xml_file(path):
-    with open("Données/patient.xml") as f:
+    with open(path) as f:
         data = f.read()
         # Ajout d'une balise root pour que le fichier XML soit valide
         # (Etree n'attend qu'1 seul noeud à la racine)
@@ -100,7 +108,6 @@ def values_to_str(value):
             result += '"'+str(arg) + '"'
         if i != len(value)-1:
             result += ","
-    print(result)
     return result
 test = ['815401327094', 'MOREL', "N'deye", "str_to_date('11/01/2011','%m/%d/%Y')", '221383362985', ' 94709786082']
 
