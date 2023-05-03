@@ -1,43 +1,6 @@
 import mysql.connector as mysql
 import xml.etree.ElementTree as etree
-
-# Ordre d'insertion des données du patient dans la base de données
-PATIENT_NODE_MAPPING = {
-    'NISS': 'NISS',
-    'nom': 'Lname',
-    'prenom': 'Fname',
-    'date_de_naissance': 'Bdate',
-    'mail': 'Email',
-    'telephone': 'Phone',
-    'inami_medecin': 'INAMImed',
-    'inami_pharmacien': 'INAMIphar'
-}
-
-# Ordre d'insertion des données du médecin dans la base de données
-MEDECIN_NODE_MAPPING = {
-    'inami': 'INAMI',
-    'nom': 'Lname',
-    'mail': 'Email',
-    'telephone': 'Phone',
-    'specialite': 'Speciality'
-}
-
-# Ordre d'insertion des données du pharmacien dans la base de données
-PHARMACIEN_NODE_MAPPING = {
-    'inami': 'INAMI',
-    'nom': 'Lname',
-    'mail': 'Email',
-    'tel': 'Phone'
-}
-
-# Ordre d'insertion des données du diagnostique dans la base de données
-DIAGNOSTIQUE_NODE_MAPPING = {
-    'inami': 'INAMI',
-    'nom': 'Lname',
-    'mail': 'Email',
-    'tel': 'Phone'
-}
-
+import csv as csv
 
 """Exécute une seule requête SQL et renvoie son résultat"""
 
@@ -113,6 +76,12 @@ def load_xml_file(path):
         return etree.fromstring(formated_data)
 
 
+def load_csv_file(path):
+    with open(path, delimiter=",") as f:
+        reader = csv.reader(f)
+        return list(reader)
+
+
 def get_data_as_dictionary(patient):
     dictionnary_patient = {}
     for attribute in patient:
@@ -147,8 +116,6 @@ def values_to_str(value):
     return result
 
 
-test = ['815401327094', 'MOREL', "N'deye",
-        "str_to_date('11/01/2011','%m/%d/%Y')", '221383362985', ' 94709786082']
-
-print(format_to_date("03/28/1924"))
-print(values_to_str(test))
+if __name__ == "__main__":
+    print("This file is not meant to be executed")
+    print(load_csv_file("Donees/specialites.csv"))

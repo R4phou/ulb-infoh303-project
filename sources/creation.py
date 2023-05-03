@@ -22,6 +22,7 @@ c = db.cursor()
 # Création des tables
 queries = get_table_creation_queries()
 execute_queries(c, queries)
+print("Successfully created tables")
 
 # Fermeture de la connexion
 close_db(db, c)
