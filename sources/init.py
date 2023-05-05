@@ -29,6 +29,7 @@ def reset_all_tables():
 def insert_data(table, parameters, values):
     query = "INSERT INTO " + table + str(""+str(tuple(parameters)).replace(
         "'", '')) + " VALUES (" + values_to_str(list(values))+");"
+    # print(query)
     execute_query(cursor, query)
 
 
@@ -95,16 +96,29 @@ def copy_spec_to_db():
         insert_data("SpecSystAnat", values.keys(), values.values())
 
 
+def copy_medicament_to_db():
+    mat = load_csv_file("Données/medicaments.csv")
+    columns = mat[0]
+    for i in range(1, len(mat)):
+        medicament = get_data_as_dictionary_csv(mat[i], columns)
+        # Réordonne les données selon le mapping de la table Patient
+        values = {MEDICAMENT_NODE_MAPPING[k]: medicament[k] for k in MEDICAMENT_NODE_MAPPING.keys(
+        ) if k in medicament and medicament[k] != 'NULL'}
+        insert_data("Medicament", values.keys(), values.values())
+
+
 if __name__ == "__main__":
     reset_all_tables()
     copy_spec_to_db()
     print("Specialites copied")
     copy_medecins_to_db()
     print("Medecins copied")
-    copy_patients_to_db()
-    print("Patients copied")
     copy_pharmaciens_to_db()
     print("Pharmaciens copied")
-    copy_diagnostiques_to_db()
-    print("Diagnostiques copied")
+    copy_medicament_to_db()
+    print("Medicaments copied")
+    # copy_patients_to_db()
+    # print("Patients copied")
+    # copy_diagnostiques_to_db()
+    # print("Diagnostiques copied")
     close_db(db, cursor)

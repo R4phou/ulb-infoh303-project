@@ -40,10 +40,12 @@ speciality_query = """CREATE TABLE SpecSystAnat
 
 medicament_query = """CREATE TABLE Medicament
     (
-    DCI VARCHAR(50) PRIMARY KEY,
+    DCI VARCHAR(50) NOT NULL,
     NomCom VARCHAR(50) NOT NULL,
     systAnat VARCHAR(100) NOT NULL,
-    Conditionnement INT NOT NULL)
+    Conditionnement INT NOT NULL,
+    PRIMARY KEY (DCI, NomCom, systAnat, Conditionnement)
+    )
 """
 
 pathologie_query = """CREATE TABLE Pathologie

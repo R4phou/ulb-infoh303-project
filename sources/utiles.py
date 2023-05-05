@@ -78,7 +78,7 @@ def load_xml_file(path):
 
 def load_csv_file(path):
     print(path)
-    return np.loadtxt(path, delimiter=",", dtype=str, skiprows=0, encoding="utf-8")
+    return list(np.loadtxt(path, delimiter=",", dtype=str, skiprows=0, encoding="utf-8"))
 
 
 def get_data_as_dictionary(patient):
@@ -89,6 +89,11 @@ def get_data_as_dictionary(patient):
             value = "NULL"
         dictionnary_patient.update({attribute.tag: value})
     return dictionnary_patient
+
+
+def get_data_as_dictionary_csv(ligne, columns):
+    return {columns[i]: ligne[i] for i in range(len(columns))}
+
 
 # Passe d'un format j/m/a à a-m-j
 

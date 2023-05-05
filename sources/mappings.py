@@ -40,3 +40,11 @@ SPECIALITE_NODE_MAPPING = {
     'name': 'NomSpec',
     'medicament': 'NomSystAnat'
 }
+
+
+MEDICAMENT_NODE_MAPPING = {
+    'dci': 'DCI',
+    'nom Commercial': 'NomCom',
+    'système anatomique': 'systAnat',
+    'conditionnement': 'Conditionnement'
+}
