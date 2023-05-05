@@ -48,3 +48,8 @@ MEDICAMENT_NODE_MAPPING = {
     'système anatomique': 'systAnat',
     'conditionnement': 'Conditionnement'
 }
+
+PATHOLOGIE_NODE_MAPPING = {
+    'name': 'NomPath',
+    'specialite': 'NomSpec'
+}

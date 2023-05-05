@@ -27,9 +27,7 @@ patient_query = """CREATE TABLE Patient
     Email VARCHAR(50),
     Phone VARCHAR(50),
     INAMImed BIGINT NOT NULL,
-    INAMIphar BIGINT NOT NULL,
-    FOREIGN KEY (INAMImed) REFERENCES Medecin(INAMI),
-    FOREIGN KEY (INAMIphar) REFERENCES Pharmacien(INAMI)
+    INAMIphar BIGINT NOT NULL
     )"""
 
 speciality_query = """CREATE TABLE SpecSystAnat
@@ -50,9 +48,11 @@ medicament_query = """CREATE TABLE Medicament
 
 pathologie_query = """CREATE TABLE Pathologie
     (
-    NomPath VARCHAR(50) PRIMARY KEY,
+    NomPath VARCHAR(50) NOT NULL,
     NomSpec VARCHAR(50) NOT NULL,
-    FOREIGN KEY (NomSpec) REFERENCES SpecSystAnat(NomSpec))
+    FOREIGN KEY (NomPath) REFERENCES Diagnositic(NomPathologie),
+    FOREIGN KEY (NomSpec) REFERENCES SpecSystAnat(NomSpec)
+    )
 """
 
 diagnostic_query = """CREATE TABLE Diagnostic
@@ -63,8 +63,7 @@ diagnostic_query = """CREATE TABLE Diagnostic
     NomSpec VARCHAR(50) NOT NULL,
     NomPathologie VARCHAR(50) NOT NULL,
     FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS),
-    FOREIGN KEY (NomSpec) REFERENCES SpecSystAnat(NomSpec),
-    FOREIGN KEY (NomPathologie) REFERENCES Pathologie(NomPath))
+    FOREIGN KEY (NomSpec) REFERENCES SpecSystAnat(NomSpec))
 """
 
 dossier_patient_query = """CREATE TABLE DossierPatient
@@ -90,4 +89,4 @@ dossier_patient_query = """CREATE TABLE DossierPatient
 
 def get_table_creation_queries():
     # , pathologie_query, diagnostic_query, dossier_patient_query]
-    return [speciality_query, medecin_query, pharmacien_query, patient_query, medicament_query, pathologie_query, diagnostic_query, dossier_patient_query]
+    return [speciality_query, medecin_query, pharmacien_query, patient_query, medicament_query, diagnostic_query, pathologie_query, dossier_patient_query]

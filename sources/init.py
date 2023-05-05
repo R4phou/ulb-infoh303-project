@@ -38,12 +38,14 @@ def copy_patients_to_db():
     root = load_xml_file("Données/patient.xml")
     for data in root:
         patient = get_data_as_dictionary(data)
+        # print(patient)
         # Réordonne les données selon le mapping de la table Patient
         values = {PATIENT_NODE_MAPPING[k]: patient[k] for k in PATIENT_NODE_MAPPING.keys(
         ) if k in patient and patient[k] != 'NULL'}
         birth_date = values['Bdate']
         values['Bdate'] = format_to_date(birth_date)
         insert_data("Patient", values.keys(), values.values())
+
 
 # Ajoute les données de medecins.xml dans la table Patient
 
@@ -79,10 +81,10 @@ def copy_diagnostiques_to_db():
         # Réordonne les données selon le mapping de la table Patient
         values = {DIAGNOSTIC_NODE_MAPPING[k]: pharmacien[k] for k in DIAGNOSTIC_NODE_MAPPING.keys(
         ) if k in pharmacien and pharmacien[k] != 'NULL'}
-        birth_date = values['naissance']
-        values['naissance'] = format_to_date(birth_date)
-        diag_date = values['date_diagnostic']
-        values['date_diagnostic'] = format_to_date(diag_date)
+        birth_date = values['BirthDate']
+        values['BirthDate'] = format_to_date(birth_date)
+        diag_date = values['date']
+        values['date'] = format_to_date(diag_date)
         insert_data("Diagnostic", values.keys(), values.values())
 
 
@@ -107,6 +109,19 @@ def copy_medicament_to_db():
         insert_data("Medicament", values.keys(), values.values())
 
 
+def copy_pathologie_to_db():
+    mat = load_csv_file("Données/pathologies.csv")
+    columns = ["name", "specialite"]
+    for i in range(0, len(mat)):
+        print(mat[i])
+        pathologie = get_data_as_dictionary_csv(mat[i], columns)
+        print(pathologie)
+        values = {PATHOLOGIE_NODE_MAPPING[k]: pathologie[k] for k in PATHOLOGIE_NODE_MAPPING.keys(
+        ) if k in pathologie and pathologie[k] != 'NULL'}
+        print(values)
+        insert_data("Pathologie", values.keys(), values.values())
+
+
 if __name__ == "__main__":
     reset_all_tables()
     copy_spec_to_db()
@@ -117,8 +132,11 @@ if __name__ == "__main__":
     print("Pharmaciens copied")
     copy_medicament_to_db()
     print("Medicaments copied")
-    # copy_patients_to_db()
-    # print("Patients copied")
-    # copy_diagnostiques_to_db()
-    # print("Diagnostiques copied")
+    copy_patients_to_db()
+    print("Patients copied")
+    db.commit()
+    copy_pathologie_to_db()
+    print("Pathologies copied")
+    copy_diagnostiques_to_db()
+    print("Diagnostiques copied")
     close_db(db, cursor)
