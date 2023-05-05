@@ -1,6 +1,6 @@
 import mysql.connector as mysql
 import xml.etree.ElementTree as etree
-import csv as csv
+import numpy as np
 
 """Exécute une seule requête SQL et renvoie son résultat"""
 
@@ -77,9 +77,8 @@ def load_xml_file(path):
 
 
 def load_csv_file(path):
-    with open(path, delimiter=",") as f:
-        reader = csv.reader(f)
-        return list(reader)
+    print(path)
+    return np.loadtxt(path, delimiter=",", dtype=str, skiprows=0, encoding="utf-8")
 
 
 def get_data_as_dictionary(patient):
@@ -118,4 +117,4 @@ def values_to_str(value):
 
 if __name__ == "__main__":
     print("This file is not meant to be executed")
-    print(load_csv_file("Donees/specialites.csv"))
+    print(load_csv_file("Données/dossiers_patients.csv"))
