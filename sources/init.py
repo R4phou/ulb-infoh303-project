@@ -122,12 +122,7 @@ def copy_spec_to_db():
     root = load_xml_file("Données/specialites.xml")
     for data in root:
         specialite = get_data_as_dictionary(data)
-        # Réordonne les données selon le mapping de la table Patient
-        values = {
-            SPECIALITE_NODE_MAPPING[k]: specialite[k]
-            for k in SPECIALITE_NODE_MAPPING.keys()
-            if k in specialite and specialite[k] != "NULL"
-        }
+        values = line_to_data(SPECIALITE_NODE_MAPPING, specialite)
         insert_data("SpecSystAnat", values.keys(), values.values())
 
 
@@ -136,12 +131,7 @@ def copy_medicament_to_db():
     columns = mat[0]
     for i in range(1, len(mat)):
         medicament = get_data_as_dictionary_csv(mat[i], columns)
-        # Réordonne les données selon le mapping de la table Patient
-        values = {
-            MEDICAMENT_NODE_MAPPING[k]: medicament[k]
-            for k in MEDICAMENT_NODE_MAPPING.keys()
-            if k in medicament and medicament[k] != "NULL"
-        }
+        values = line_to_data(MEDICAMENT_NODE_MAPPING, medicament)
         insert_data("Medicament", values.keys(), values.values())
 
 
@@ -150,14 +140,66 @@ def copy_pathologie_to_db():
     columns = ["name", "specialite"]
     for i in range(0, len(mat)):
         pathologie = get_data_as_dictionary_csv(mat[i], columns)
-        values = {
-            PATHOLOGIE_NODE_MAPPING[k]: pathologie[k]
-            for k in PATHOLOGIE_NODE_MAPPING.keys()
-            if k in pathologie and pathologie[k] != "NULL"
-        }
-        print(values)
+        values = line_to_data(PATHOLOGIE_NODE_MAPPING, pathologie)
         insert_data("Pathologie", values.keys(), values.values())
         print("data inserted")
+
+
+def line_to_data(mapping, dico):
+    return {
+        mapping[k]: dico[k] for k in mapping.keys() if k in dico and dico[k] != "NULL"
+    }
+
+
+def insert_xml(path, mapping, name):
+    root = load_xml_file(path)
+    l = []
+    for data in root:
+        item = get_data_as_dictionary(data)
+        values = line_to_data(mapping, item)
+        if values not in l:
+            l.append(values)
+    insert_list(l, name)
+
+
+def insert_csv(path, mapping, name, columns, skip=0):
+    mat = load_csv_file(path, skip)
+    l = []
+    for data in range(skip, len(mat)):
+        item = get_data_as_dictionary_csv(data, columns)
+        values = line_to_data(mapping, item)
+        if values not in l:
+            l.append(values)
+    insert_list(l, name)
+
+
+def insert_list(list, name):
+    for item in list:
+        insert_data(name, item.keys(), item.values())
+
+
+def init_db():
+    reset_all_tables()
+    insert_xml("Données/specialites.xml", SPECIALITE_NODE_MAPPING, "SpecSystAnat")
+    insert_xml("Données/medecins.xml", MEDECIN_NODE_MAPPING, "Medecin")
+    insert_xml("Données/pharmaciens.xml", PHARMACIEN_NODE_MAPPING, "Pharmacien")
+    insert_csv(
+        "Données/medicaments.csv",
+        MEDICAMENT_NODE_MAPPING,
+        "Medicament",
+        ["dci", "nom Commercial", "système anatomique", "conditionnement"],
+        1,
+    )
+    insert_xml("Données/patients.xml", PATIENT_NODE_MAPPING, "Patient")
+    insert_csv(
+        "Données/pathologies.csv",
+        PATHOLOGIE_NODE_MAPPING,
+        "Pathologie",
+        ["name", "specialite"],
+        0,
+    )
+    insert_xml("Données/diagnostiques.xml", DIAGNOSTIC_NODE_MAPPING, "Diagnostic")
+    close_db(db, cursor)
 
 
 if __name__ == "__main__":

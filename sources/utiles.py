@@ -79,8 +79,8 @@ def load_xml_file(path):
         return etree.fromstring(formated_data)
 
 
-def load_csv_file(path):
-    return np.loadtxt(path, delimiter=",", dtype=str, skiprows=0, encoding="utf-8")
+def load_csv_file(path, skip):
+    return np.loadtxt(path, delimiter=",", dtype=str, skiprows=skip, encoding="utf-8")
 
 
 def get_data_as_dictionary(patient):
