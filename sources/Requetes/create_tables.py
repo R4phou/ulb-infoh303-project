@@ -32,8 +32,10 @@ patient_query = """CREATE TABLE Patient
 
 speciality_query = """CREATE TABLE SpecSystAnat
     (
-    NomSpec VARCHAR(50) NOT NULL PRIMARY KEY,
-    NomSystAnat VARCHAR(100) NOT NULL)
+    NomSpec VARCHAR(50) NOT NULL ,
+    NomSystAnat VARCHAR(100) NOT NULL,
+    PRIMARY KEY (NomSpec, NomSystAnat)
+    )
 """
 
 medicament_query = """CREATE TABLE Medicament
@@ -48,9 +50,8 @@ medicament_query = """CREATE TABLE Medicament
 
 pathologie_query = """CREATE TABLE Pathologie
     (
-    NomPath VARCHAR(50) NOT NULL,
+    NomPath VARCHAR(50) PRIMARY KEY,
     NomSpec VARCHAR(50) NOT NULL,
-    FOREIGN KEY (NomPath) REFERENCES Diagnositic(NomPathologie),
     FOREIGN KEY (NomSpec) REFERENCES SpecSystAnat(NomSpec)
     )
 """
@@ -61,9 +62,10 @@ diagnostic_query = """CREATE TABLE Diagnostic
     BirthDate DATE NOT NULL,
     date DATE NOT NULL,
     NomSpec VARCHAR(50) NOT NULL,
-    NomPathologie VARCHAR(50) NOT NULL,
+    NomPathologie VARCHAR(50) NOT NULL PRIMARY KEY,
     FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS),
-    FOREIGN KEY (NomSpec) REFERENCES SpecSystAnat(NomSpec))
+    FOREIGN KEY (NomSpec) REFERENCES SpecSystAnat(NomSpec),
+    FOREIGN KEY (NomPathologie) REFERENCES Pathologie(NomPath))
 """
 
 dossier_patient_query = """CREATE TABLE DossierPatient
@@ -89,4 +91,13 @@ dossier_patient_query = """CREATE TABLE DossierPatient
 
 def get_table_creation_queries():
     # , pathologie_query, diagnostic_query, dossier_patient_query]
-    return [speciality_query, medecin_query, pharmacien_query, patient_query, medicament_query, diagnostic_query, pathologie_query, dossier_patient_query]
+    return [
+        speciality_query,
+        medecin_query,
+        pharmacien_query,
+        patient_query,
+        medicament_query,
+        pathologie_query,
+        diagnostic_query,
+        dossier_patient_query,
+    ]
