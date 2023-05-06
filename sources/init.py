@@ -152,25 +152,44 @@ def line_to_data(mapping, dico):
 
 
 def insert_xml(path, mapping, name):
+    print("Inserting " + name + " ...")
     root = load_xml_file(path)
     l = []
     for data in root:
         item = get_data_as_dictionary(data)
         values = line_to_data(mapping, item)
+        if name == "Patient":
+            birth_date = values["Bdate"]
+            values["Bdate"] = format_to_date(birth_date)
+        if name == "Diagnostic":
+            birth_date = values["BirthDate"]
+            values["BirthDate"] = format_to_date(birth_date)
+            diag_date = values["date"]
+            values["date"] = format_to_date(diag_date)
         if values not in l:
             l.append(values)
     insert_list(l, name)
+    print("Table " + name + " inserted")
+    db.commit()
 
 
 def insert_csv(path, mapping, name, columns, skip=0):
+    print("Inserting " + name + " ...")
     mat = load_csv_file(path, skip)
     l = []
     for data in range(skip, len(mat)):
-        item = get_data_as_dictionary_csv(data, columns)
+        item = get_data_as_dictionary_csv(mat[data], columns)
         values = line_to_data(mapping, item)
         if values not in l:
             l.append(values)
+        if name == "DossierPatient":
+            datepre = values["datePrescription"]
+            values["datePrescription"] = format_to_date(datepre)
+            dateven = values["dateVente"]
+            values["dateVente"] = format_to_date(dateven)
     insert_list(l, name)
+    print("Table " + name + " inserted")
+    db.commit()
 
 
 def insert_list(list, name):
@@ -180,6 +199,7 @@ def insert_list(list, name):
 
 def init_db():
     reset_all_tables()
+    print("Tables reset")
     insert_xml("Données/specialites.xml", SPECIALITE_NODE_MAPPING, "SpecSystAnat")
     insert_xml("Données/medecins.xml", MEDECIN_NODE_MAPPING, "Medecin")
     insert_xml("Données/pharmaciens.xml", PHARMACIEN_NODE_MAPPING, "Pharmacien")
@@ -190,7 +210,7 @@ def init_db():
         ["dci", "nom Commercial", "système anatomique", "conditionnement"],
         1,
     )
-    insert_xml("Données/patients.xml", PATIENT_NODE_MAPPING, "Patient")
+    insert_xml("Données/patient.xml", PATIENT_NODE_MAPPING, "Patient")
     insert_csv(
         "Données/pathologies.csv",
         PATHOLOGIE_NODE_MAPPING,
@@ -199,6 +219,24 @@ def init_db():
         0,
     )
     insert_xml("Données/diagnostiques.xml", DIAGNOSTIC_NODE_MAPPING, "Diagnostic")
+    insert_csv(
+        "Données/dossiers_patients.csv",
+        DOSSIER_NODE_MAPPING,
+        "DossierPatient",
+        [
+            "NISS_patient",
+            "medecin",
+            "inami_medecin",
+            "pharmacien",
+            "inami_pharmacien",
+            "medicament_nom_commercial",
+            "DCI",
+            "date_prescription",
+            "date_vente",
+            "duree_traitement",
+        ],
+        1,
+    )
     close_db(db, cursor)
 
 

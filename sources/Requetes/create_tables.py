@@ -50,9 +50,9 @@ medicament_query = """CREATE TABLE Medicament
 
 pathologie_query = """CREATE TABLE Pathologie
     (
-    NomPath VARCHAR(50) PRIMARY KEY,
+    NomPath VARCHAR(50) NOT NULL,
     NomSpec VARCHAR(50) NOT NULL,
-    FOREIGN KEY (NomSpec) REFERENCES SpecSystAnat(NomSpec)
+    PRIMARY KEY (NomPath, NomSpec)
     )
 """
 
@@ -62,9 +62,8 @@ diagnostic_query = """CREATE TABLE Diagnostic
     BirthDate DATE NOT NULL,
     date DATE NOT NULL,
     NomSpec VARCHAR(50) NOT NULL,
-    NomPathologie VARCHAR(50) NOT NULL PRIMARY KEY,
+    NomPathologie VARCHAR(50) NOT NULL,
     FOREIGN KEY (NISSPatient) REFERENCES Patient(NISS),
-    FOREIGN KEY (NomSpec) REFERENCES SpecSystAnat(NomSpec),
     FOREIGN KEY (NomPathologie) REFERENCES Pathologie(NomPath))
 """
 
