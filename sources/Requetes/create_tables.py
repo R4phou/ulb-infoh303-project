@@ -32,7 +32,7 @@ patient_query = """CREATE TABLE Patient
 
 speciality_query = """CREATE TABLE SpecSystAnat
     (
-    NomSpec VARCHAR(50) NOT NULL ,
+    NomSpec VARCHAR(50) NOT NULL,
     NomSystAnat VARCHAR(100) NOT NULL,
     PRIMARY KEY (NomSpec, NomSystAnat)
     )
