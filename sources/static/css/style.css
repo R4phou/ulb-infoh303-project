@@ -57,7 +57,7 @@ form {
   font-size: 2rem;
   font-family: var(--font-title); }
 
-.request-container .request button {
+.launch-container .btn-container button, .request-container .request button {
   background: var(--gradient);
   margin: 1rem;
   padding: 1rem;
@@ -69,7 +69,7 @@ form {
   border: 1px solid var(--text);
   border-radius: 10px;
   color: white; }
-  .request-container .request button:hover {
+  .launch-container .btn-container button:hover, .request-container .request button:hover {
     border-color: var(--light);
     background: var(--gradient-reverse); }
 
@@ -98,8 +98,21 @@ form {
 .intro {
   margin: 2rem;
   text-align: center; }
-  .intro h2 {
-    text-decoration: underline; }
+
+h2 {
+  text-decoration: underline;
+  text-align: center; }
+
+.launch-container {
+  text-align: center;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column; }
+  .launch-container .btn-container {
+    display: flex;
+    flex-direction: space-between;
+    justify-content: center;
+    margin: 2rem; }
 
 .request-container {
   margin: 2rem;
@@ -144,7 +157,4 @@ footer {
   justify-content: center;
   background: var(--text);
   color: white;
-  padding: 2rem;
-  position: absolute;
-  width: 100%;
-  bottom: 0; }
+  padding: 2rem; }
