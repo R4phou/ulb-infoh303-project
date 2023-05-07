@@ -32,7 +32,9 @@ def init():
 
 @app.route("/get-string1", methods=["GET"])
 def get_string1():
-    return string1
+    import r1 as r1
+
+    return r1.r1()
 
 
 # Route pour récupérer la chaîne de caractères 2
@@ -40,7 +42,9 @@ def get_string1():
 
 @app.route("/get-string2", methods=["GET"])
 def get_string2():
-    return string2
+    import r2 as r2
+
+    return r2.r2()
 
 
 # Route pour récupérer la chaîne de caractères 3
@@ -48,7 +52,23 @@ def get_string2():
 
 @app.route("/get-string3", methods=["GET"])
 def get_string3():
-    return string3
+    import r3 as r3
+
+    return r3.r3()
+
+
+"""
+POUR AJOUTER LES REQUETES SUIVANTES,
+Creer un fichier r4.py dans le dossier sources
+mettre la requete dans une fonction r4() (voir r1.py, r2.py, r3.py)
+ajouter les lignes suivantes dans ce fichier en modifiant les chiffres par le num de la requete
+"""
+
+# @app.route("/get-string4", methods=["GET"])
+# def get_string4():
+#     import r4 as r4
+
+#     return r4.r4()
 
 
 if __name__ == "__main__":

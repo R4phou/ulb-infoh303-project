@@ -1,0 +1,25 @@
+// Téléphones
+@mixin xs {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+// Téléphones en paysage et tablette portrait
+@mixin sm {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+//Tablette lanndscape et pc portables
+@mixin md {
+  @media (min-width: 768px) and(max-width: 979px) {
+    @content;
+  }
+}
+// large deskstop
+
+@mixin xl {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}

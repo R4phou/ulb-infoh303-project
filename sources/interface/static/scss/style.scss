@@ -1,0 +1,95 @@
+@import "bases";
+@import "classes";
+@import "utils";
+@import "media-queries";
+
+.tot-container{
+  min-height: 100vh;
+}
+
+.intro{
+  margin: 2rem;
+  text-align: center;
+  
+}
+
+h2{
+  text-decoration: underline;
+  text-align: center;
+}
+
+.launch-container{
+  text-align: center;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  .btn-container{
+    display: flex;
+    flex-direction: space-between;
+    justify-content: center;
+    margin: 2rem;
+    button{
+      @extend %bouton;
+    }
+  }
+}
+
+
+.request-container{
+  margin: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  // width:50rem;
+  overflow: auto;
+  border: 0.1rem solid var(--text);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem var(--text);
+  justify-content: center;
+  align-items: center;
+  .request{
+    margin: 1rem;
+    flex:0 1 auto;
+    p{
+      text-align: center;
+    }
+    button{
+      @extend %bouton;
+    }
+  }
+}
+
+.output{
+  h2{
+    text-decoration: underline;
+    text-align: center;
+  }
+  margin: 2rem;
+  text-align: justify;
+  .output-text{
+    margin: 2rem;
+    padding: 2rem;
+    border: 0.1rem solid var(--text);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem var(--text);
+    background: var(--light);
+    color: var(--text);
+  }
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  background: var(--text);
+  color: white;
+  padding: 0rem;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  background: var(--text);
+  color: white;
+  padding: 2rem;
+  
+}
+
