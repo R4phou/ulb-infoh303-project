@@ -71,5 +71,19 @@ ajouter les lignes suivantes dans ce fichier en modifiant les chiffres par le nu
 #     return r4.r4()
 
 
+@app.route("/get-string9", methods=["GET"])
+def get_string9():
+    import r9 as r9
+
+    return r9.r9()
+
+
+@app.route("/get-string10", methods=["GET"])
+def get_string10():
+    import r10 as r10
+
+    return r10.r10()
+
+
 if __name__ == "__main__":
     app.run(debug=True)
