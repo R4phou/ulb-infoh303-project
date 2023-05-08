@@ -1,0 +1,20 @@
+r6
+
+SELECT DISTINCT M.LNAME, M.INAMI --Selectionner les médecins
+FROM MEDECIN M
+WHERE M.INAMI IN (
+    SELECT DP.INAMIMED --Selectionner les médecins qui ont prescrit des medicaments
+    FROM DOSSIERPATIENT DP
+    WHERE DP.NOMCOMMEDICAMENT IN (
+        SELECT Med.NomCom --Selectionner les medicaments
+        FROM MEDICAMENT Med
+        WHERE Med.systAnat IN (
+            SELECT S.NomSpec --Selectionner les systemes anatomiques
+            FROM SPECSYSTANAT S
+            WHERE S.NOMSPEC <> M.Speciality
+          )
+      )
+  )
+
+-- Médicament.systAnat --> SpecSystAnat.NomSpec  --> Medecin.Speciality
+--> DossierPatient.InamiMed --> DossierPatient.NomComMedicament
