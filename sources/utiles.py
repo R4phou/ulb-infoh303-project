@@ -16,14 +16,18 @@ def execute_requete(file):
     print("Successfully connected to MySQL")
     # Créer le curseur qui permet de faire des queries et commandes SQL
     c = db.cursor()
-    requete = open(file, "r").read()
-    c.execute(requete)
-    result = ""
-    i = 0
-    for elem in c:
-        i += 1
-        result += str(i) + " | " + str(elem) + "<br>"
-    return str(i) + " éléments ont été sélectionnés <br>" + result
+    try:
+        requete = open(file, "r").read()
+        c.execute(requete)
+        result = ""
+        i = 0
+        for elem in c:
+            i += 1
+            result += str(i) + " | " + str(elem) + "<br>"
+        result = str(i) + " éléments ont été sélectionnés <br>" + result
+    except:
+        result = "Erreur lors de l'exécution de la requête"
+    return result
 
 
 """Exécute une liste de requêtes SQL et renvoie leurs résultats"""
