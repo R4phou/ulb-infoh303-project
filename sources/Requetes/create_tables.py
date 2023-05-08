@@ -44,7 +44,7 @@ medicament_query = """CREATE TABLE Medicament
     NomCom VARCHAR(50) NOT NULL,
     systAnat VARCHAR(100) NOT NULL,
     Conditionnement INT NOT NULL,
-    PRIMARY KEY (DCI, NomCom, systAnat, Conditionnement)
+    PRIMARY KEY (DCI, NomCom, Conditionnement)
     )
 """
 
