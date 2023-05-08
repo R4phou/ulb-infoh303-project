@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request  # pip install flask
+from utiles import *
 
 app = Flask(__name__)
 
@@ -32,63 +33,52 @@ def init():
 
 @app.route("/get-string1", methods=["GET"])
 def get_string1():
-    import r1 as r1
-
-    return r1.r1()
-
-
-# Route pour récupérer la chaîne de caractères 2
+    return execute_requete("./Requetes/r1.sql")
 
 
 @app.route("/get-string2", methods=["GET"])
 def get_string2():
-    import r2 as r2
-
-    return r2.r2()
-
-
-# Route pour récupérer la chaîne de caractères 3
+    return execute_requete("./Requetes/r2.sql")
 
 
 @app.route("/get-string3", methods=["GET"])
 def get_string3():
-    import r3 as r3
-
-    return r3.r3()
+    return execute_requete("./Requetes/r3.sql")
 
 
-"""
-POUR AJOUTER LES REQUETES SUIVANTES,
-Creer un fichier r4.py dans le dossier sources
-mettre la requete dans une fonction r4() (voir r1.py, r2.py, r3.py)
-ajouter les lignes suivantes dans ce fichier en modifiant les chiffres par le num de la requete
-"""
-
-# @app.route("/get-string4", methods=["GET"])
-# def get_string4():
-#     import r4 as r4
+@app.route("/get-string4", methods=["GET"])
+def get_string4():
+    return execute_requete("./Requetes/r4.sql")
 
 
-#     return r4.r4()
+@app.route("/get-string5", methods=["GET"])
+def get_string5():
+    return execute_requete("./Requetes/r5.sql")
+
+
+@app.route("/get-string6", methods=["GET"])
+def get_string6():
+    return execute_requete("./Requetes/r6.sql")
+
+
+@app.route("/get-string7", methods=["GET"])
+def get_string7():
+    return execute_requete("./Requetes/r7.sql")
+
+
 @app.route("/get-string8", methods=["GET"])
 def get_string8():
-    import r8 as r8
-
-    return r8.r8()
+    return execute_requete("./Requetes/r8.sql")
 
 
 @app.route("/get-string9", methods=["GET"])
 def get_string9():
-    import r9 as r9
-
-    return r9.r9()
+    return execute_requete("./Requetes/r9.sql")
 
 
 @app.route("/get-string10", methods=["GET"])
 def get_string10():
-    import r10 as r10
-
-    return r10.r10()
+    return execute_requete("./Requetes/r10.sql")
 
 
 if __name__ == "__main__":
