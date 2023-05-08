@@ -7,9 +7,11 @@ def r9():
     print("Successfully connected to MySQL")
     # Créer le curseur qui permet de faire des queries et commandes SQL
     c = db.cursor()
-    requete = """SELECT dp.NISSPatient, COUNT(DISTINCT dp.InamiMed)
-                 FROM DossierPatient dp
-                 GROUP BY dp.NISSPatient
+    requete = """SELECT p.LName, p.Fname, COUNT(DISTINCT dp.InamiMed)
+                 FROM DossierPatient dp, Patient p
+                 WHERE dp.NISSPatient = p.NISS
+                 GROUP BY p.LName, p.Fname
+                 
     """
     c.execute(requete)
     result = ""

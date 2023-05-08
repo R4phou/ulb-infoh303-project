@@ -68,7 +68,13 @@ ajouter les lignes suivantes dans ce fichier en modifiant les chiffres par le nu
 # def get_string4():
 #     import r4 as r4
 
+
 #     return r4.r4()
+@app.route("/get-string8", methods=["GET"])
+def get_string8():
+    import r8 as r8
+
+    return r8.r8()
 
 
 @app.route("/get-string9", methods=["GET"])
