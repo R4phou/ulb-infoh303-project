@@ -6,7 +6,7 @@ medecin_query = """CREATE TABLE Medecin
     INAMI BIGINT NOT NULL PRIMARY KEY,
     Lname VARCHAR(50) NOT NULL,
     Email VARCHAR(50),
-    Phone VARCHAR(50),
+    Phone VARCHAR(50) NOT NULL,
     Speciality VARCHAR(50) NOT NULL,
     FOREIGN KEY (Speciality) REFERENCES SpecSystAnat(NomSpec)
     )
@@ -16,7 +16,7 @@ pharmacien_query = """CREATE TABLE Pharmacien
     (INAMI BIGINT PRIMARY KEY,
     Lname VARCHAR(50) NOT NULL,
     Email VARCHAR(50),
-    Phone VARCHAR(50))
+    Phone VARCHAR(50) NOT NULL)
 """
 
 patient_query = """CREATE TABLE Patient 
