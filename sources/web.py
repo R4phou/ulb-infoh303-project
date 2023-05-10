@@ -8,6 +8,8 @@ string1 = "Bonjour!"
 string2 = "Comment ça va ?"
 string3 = "Quelle heure est-il ?"
 
+PATIENT = 2017845529
+
 
 @app.route("/")
 def index():
@@ -32,7 +34,7 @@ def init():
 def get_string1():
     return (
         "Requête 1: 'La liste des noms commerciaux de médicaments correspondant à un nom en DCI, classés par ordre alphabétique et taille de conditionnement'<br>"
-        + execute_requete("./Requetes/r1.sql")
+        + execute_requete("./sources/Requetes/r1.sql")
     )
 
 
@@ -40,7 +42,7 @@ def get_string1():
 def get_string2():
     return (
         "Requête 2: 'La liste des pathologies qui peuvent être prise en charge par un seul type de spécialistes'<br>"
-        + execute_requete("./Requetes/r2.sql")
+        + execute_requete("./sources/Requetes/r2.sql")
     )
 
 
@@ -48,7 +50,7 @@ def get_string2():
 def get_string3():
     return (
         "Requête 3: 'La spécialité de médecins pour laquelle les médecins prescrivent le plus de médicaments'<br>"
-        + execute_requete("./Requetes/r3.sql")
+        + execute_requete("./sources/Requetes/r3.sql")
     )
 
 
@@ -56,7 +58,7 @@ def get_string3():
 def get_string4():
     return (
         "Requête 4: 'Tous les utilisateurs ayant consommé un médicament spécifique (sous son nom commercial) après une date donnée, par exemple en cas de rappel de produit pour lot contaminé'<br>"
-        + execute_requete("./Requetes/r4.sql")
+        + execute_requete("./sources/Requetes/r4.sql")
     )
 
 
@@ -64,7 +66,7 @@ def get_string4():
 def get_string5():
     return (
         "Requête 5: 'Tous les patients ayant été traités par un médicament (sous sa DCI) à une date antérieure mais qui ne le sont plus, pour vérifier qu’un patient suive bien un traitement chronique'<br>"
-        + execute_requete("./Requetes/r5.sql")
+        + execute_requete("./sources/Requetes/r5.sql")
     )
 
 
@@ -72,7 +74,7 @@ def get_string5():
 def get_string6():
     return (
         "Requête 6: 'La liste des médecins ayant prescrit des médicaments ne relevant pas de leur spécialité'<br>"
-        + execute_requete("./Requetes/r6.sql")
+        + execute_requete("./sources/Requetes/r6.sql")
     )
 
 
@@ -80,7 +82,7 @@ def get_string6():
 def get_string7():
     return (
         "Requête 7: 'Pour chaque décennie entre 1950 et 2020, (1950 − 59, 1960 − 69, ...), le médicament le plus consommé par des patients nés durant cette décennie'<br>"
-        + execute_requete("./Requetes/r7.sql")
+        + execute_requete("./sources/Requetes/r7.sql")
     )
 
 
@@ -88,7 +90,7 @@ def get_string7():
 def get_string8():
     return (
         "Requête 8: 'Quelle est la pathologie la plus diagnostiquée ?'<br>"
-        + execute_requete("./Requetes/r8.sql")
+        + execute_requete("./sources/Requetes/r8.sql")
     )
 
 
@@ -96,7 +98,7 @@ def get_string8():
 def get_string9():
     return (
         "Requête 9: 'Pour chaque patient, le nombre de médecin lui ayant prescrit un médicament'<br>"
-        + execute_requete("./Requetes/r9.sql")
+        + execute_requete("./sources/Requetes/r9.sql")
     )
 
 
@@ -104,8 +106,24 @@ def get_string9():
 def get_string10():
     return (
         "Requête 10: 'La liste de médicament n’étant plus prescrit depuis une date spécifique' <br>"
-        + execute_requete("./Requetes/r10.sql")
+        + execute_requete("./sources/Requetes/r10.sql")
     )
+
+
+@app.route("/getinfo", methods=["GET"])
+def get_info():
+    # TO DO : Récupérer les informations du patient
+    return (
+        "Bienvenue patient "
+        + str(PATIENT)
+        + " ! <br> Votre médecin de référence est : TO ADD <br> votre pharmacien de référence est : TO ADD"
+    )
+
+
+@app.route("/get-infomedpatient", methods=["GET"])
+def get_infomedpatient():
+    # TO DO : Récupérer les informations médicales du patient
+    return "Informations du patients: " + str(PATIENT)
 
 
 @app.route("/", methods=["POST"])
@@ -115,6 +133,16 @@ def reset():
         return render_template("/")
     else:
         return render_template("/index.html")
+
+
+@app.route("/connexion-patient", methods=["POST"])
+def connexion_patient():
+    niss = request.form.get("NISSPatient")
+    if niss != None:
+        global PATIENT
+        PATIENT = niss
+        # TO DO RECUPERER LE MEDECIN ET PHARMACIEN DE REFERENCE DU PATIENT
+    return render_template("index.html")
 
 
 @app.route("/ajouter_patient", methods=["POST"])

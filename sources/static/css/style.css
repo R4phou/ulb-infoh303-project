@@ -57,7 +57,7 @@ form {
   font-size: 2rem;
   font-family: var(--font-title); }
 
-.launch-container .btn-container button, .inscriptions-container .flex-container form button, .request-container .request button, header button {
+button, .launch-container .btn-container button, .inscriptions-container .flex-container form button, .request-container .request button, header button {
   background: var(--gradient);
   margin: 1rem;
   padding: 1rem;
@@ -69,7 +69,7 @@ form {
   border: 1px solid var(--text);
   border-radius: 10px;
   color: white; }
-  .launch-container .btn-container button:hover, .inscriptions-container .flex-container form button:hover, .request-container .request button:hover, header button:hover {
+  button:hover, .launch-container .btn-container button:hover, .inscriptions-container .flex-container form button:hover, .request-container .request button:hover {
     border-color: var(--light);
     background: var(--gradient-reverse); }
 
@@ -94,6 +94,9 @@ form {
 
 .tot-container {
   min-height: 100vh; }
+
+input {
+  padding: 0.5rem; }
 
 .intro {
   margin: 2rem;
@@ -173,6 +176,42 @@ h2 {
     .inscriptions-container .flex-container .inscription-medecin-container {
       padding: 0 4rem 2rem 4rem; }
 
+.connexion-patient {
+  background: #777;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem; }
+  .connexion-patient form {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .connexion-patient form input {
+      margin: 1rem;
+      height: 4rem;
+      border: 0.1rem solid var(--text);
+      border-radius: 0.5rem;
+      box-shadow: 0 0 1rem var(--text);
+      background: var(--light);
+      color: var(--text);
+      flex: 0 1 auto; }
+  .connexion-patient .patient-menu-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center; }
+    .connexion-patient .patient-menu-container p {
+      margin: 2rem;
+      text-align: justify; }
+    .connexion-patient .patient-menu-container .info-med-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%; }
+      .connexion-patient .patient-menu-container .info-med-container .output-text {
+        width: 95%; }
+
 .request-container {
   margin: 2rem;
   display: flex;
@@ -195,14 +234,15 @@ h2 {
   .output h2 {
     text-decoration: underline;
     text-align: center; }
-  .output .output-text {
-    margin: 2rem;
-    padding: 2rem;
-    border: 0.1rem solid var(--text);
-    border-radius: 0.5rem;
-    box-shadow: 0 0 1rem var(--text);
-    background: var(--light);
-    color: var(--text); }
+
+.output-text {
+  margin: 2rem;
+  padding: 2rem;
+  border: 0.1rem solid var(--text);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem var(--text);
+  background: var(--light);
+  color: var(--text); }
 
 header {
   display: flex;

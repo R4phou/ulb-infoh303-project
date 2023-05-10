@@ -78,6 +78,11 @@
             $("#result-text").html(data);
           });
         });
+        $("#btninfomedicalespatient").click(function () {
+          $.get("/get-infomedpatient", function (data) {
+            $("#infomedicalespatient").html(data);
+          });
+        });
         $("#creer").click(function () {
           $.get("/creer", function (data) {
             $("#init-txt").html(data);
@@ -92,6 +97,11 @@
           $("#ajout-txt").html(
             "Requête envoyée pour ajouter un Patient dans la base de données!"
           );
+        });
+        $("#getinfo").click(function () {
+          $.get("/getinfo", function (data) {
+            $("#connexion-txt").html(data);
+          });
         });
         $("#envoyerPhar").click(function () {
           $("#ajout-txt").html(
@@ -117,12 +127,27 @@
           btnshowForm.innerHTML = "Montrer menu Ajout";
         }
       }
+
+      function toggleConnexion() {
+        var connexionForms = document.getElementById("connexion-patient");
+        var btnshowForm = document.getElementById("btnshowConn");
+        if (connexionForms.style.display === "none") {
+          connexionForms.style.display = "flex";
+          btnshowForm.innerHTML = "Cacher menu Connexion";
+        } else {
+          connexionForms.style.display = "none";
+          btnshowForm.innerHTML = "Montrer menu Connexion";
+        }
+      }
     </script>
     <div class="tot-container">
       <header>
         <h1>INFO-H303 - Groupe 12</h1>
         <button id="btnshowForm" onclick="toggleForm()">
           Montrer menu Ajout
+        </button>
+        <button id="btnshowConn" onclick="toggleConnexion()">
+          Montrer menu Connexion
         </button>
       </header>
       <div class="container">
@@ -154,7 +179,13 @@
               <form method="POST" name="form_patient" action="/ajouter_patient">
                 <div class="inputs-container">
                   <label for="NISS">NISS:</label>
-                  <input type="text" name="NISS" id="NISS" required />
+                  <input
+                    type="text"
+                    name="NISS"
+                    id="NISS"
+                    placeholder="NISS"
+                    required
+                  />
 
                   <label for="date_de_naissance">Date de naissance:</label>
                   <input
@@ -164,25 +195,53 @@
                     required
                   />
                   <label for="inami_medecin">INAMI médecin:</label>
-                  <input type="text" name="inami_medecin" id="inami_medecin" />
+                  <input
+                    type="text"
+                    name="inami_medecin"
+                    id="inami_medecin"
+                    placeholder="INAMI Médecin"
+                  />
 
                   <label for="inami_pharmacien">INAMI pharmacien:</label>
                   <input
                     type="text"
                     name="inami_pharmacien"
                     id="inami_pharmacien"
+                    placeholder="INAMI Pharmacien"
                   />
                   <label for="mail">Mail:</label>
-                  <input type="email" name="mail" id="mail" />
+                  <input
+                    type="email"
+                    name="mail"
+                    id="mail"
+                    placeholder="Adresse Mail"
+                  />
 
                   <label for="nom">Nom:</label>
-                  <input type="text" name="nom" id="nom" required />
+                  <input
+                    type="text"
+                    name="nom"
+                    id="nom"
+                    placeholder="Nom"
+                    required
+                  />
 
                   <label for="prenom">Prénom:</label>
-                  <input type="text" name="prenom" id="prenom" required />
+                  <input
+                    type="text"
+                    name="prenom"
+                    id="prenom"
+                    placeholder="Prénom"
+                    required
+                  />
 
                   <label for="telephone">Téléphone:</label>
-                  <input type="tel" name="telephone" id="telephone" />
+                  <input
+                    type="tel"
+                    name="telephone"
+                    id="telephone"
+                    placeholder="Numéro de téléphone"
+                  />
                 </div>
                 <button type="submit" id="envoyerPat" value="Envoyer">
                   Envoyer
@@ -198,18 +257,35 @@
               >
                 <div class="inputs-container">
                   <label for="inami_pharma">INAMI pharmacien:</label>
-                  <input type="text" name="inami_pharma" id="inami_pharma" />
+                  <input
+                    type="text"
+                    name="inami_pharma"
+                    id="inami_pharma"
+                    placeholder="INAMI"
+                  />
                   <label for="mailpharma">Mail:</label>
-                  <input type="email" name="mailpharma" id="mailpharma" />
+                  <input
+                    type="email"
+                    name="mailpharma"
+                    id="mailpharma"
+                    placeholder="Adresse mail"
+                  />
 
                   <label for="nomPharma">Nom:</label>
-                  <input type="text" name="nomPharma" id="nomPharma" required />
+                  <input
+                    type="text"
+                    name="nomPharma"
+                    id="nomPharma"
+                    placeholder="Nom"
+                    required
+                  />
 
                   <label for="telephonePharma">Téléphone:</label>
                   <input
                     type="tel"
                     name="telephonePharma"
                     id="telephonePharma"
+                    placeholder="Numéro de téléphone"
                     required
                   />
                 </div>
@@ -223,18 +299,35 @@
               <form method="POST" name="form_medecin" action="/ajouter_medecin">
                 <div class="inputs-container">
                   <label for="inami_med">INAMI médecin:</label>
-                  <input type="text" name="inami_med" id="inami_med" />
+                  <input
+                    type="text"
+                    name="inami_med"
+                    id="inami_med"
+                    placeholder="INAMI"
+                  />
                   <label for="mailmed">Mail:</label>
-                  <input type="email" name="mailmed" id="mailmed" />
+                  <input
+                    type="email"
+                    name="mailmed"
+                    id="mailmed"
+                    placeholder="Adresse mail"
+                  />
 
                   <label for="nomMed">Nom:</label>
-                  <input type="text" name="nomMed" id="nomMed" required />
+                  <input
+                    type="text"
+                    name="nomMed"
+                    id="nomMed"
+                    placeholder="Nom"
+                    required
+                  />
 
                   <label for="telephoneMed">Téléphone:</label>
                   <input
                     type="tel"
                     name="telephoneMed"
                     id="telephoneMed"
+                    placeholder="Numéro de téléphone"
                     required
                   />
                   <label for="Specialite">Spécialité:</label>
@@ -242,6 +335,7 @@
                     type="text"
                     name="Specialite"
                     id="Specialite"
+                    placeholder="Spécialité"
                     required
                   />
                 </div>
@@ -262,7 +356,42 @@
             {% endif %}
           </div>
         </div>
-
+        <div class="connexion-patient" id="connexion-patient">
+          <h2>Connexion d'un patient</h2>
+          <form
+            method="POST"
+            name="form-connexion-patient"
+            action="/connexion-patient"
+          >
+            <input
+              type="text"
+              name="NISSPatient"
+              id="NISSPatient"
+              placeholder="Votre NISS"
+            />
+            <button type="submit" id="connexion" value="Envoyer">
+              Envoyer
+            </button>
+            <button id="getinfo">Récupérer les informations</button>
+          </form>
+          <div class="patient-menu-container">
+            <p id="connexion-txt">
+              Remplisser le fomulaire pour ajouter un Patient, Pharmacien ou
+              Médecin dans la base de données!
+            </p>
+            <div class="info-med-container">
+              <h3>Vos informations médicales</h3>
+              <button id="btninfomedicalespatient">
+                Récupérez vos informations médicales
+              </button>
+              <div class="output-text">
+                <p id="infomedicalespatient">
+                  Ici s'affichent les informations médicales
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
         <h2>Différentes requêtes:</h2>
         <div class="request-container">
           <div class="request">
