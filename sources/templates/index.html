@@ -80,19 +80,50 @@
         });
         $("#creer").click(function () {
           $.get("/creer", function (data) {
-            $("#result-text").html(data);
+            $("#init-txt").html(data);
           });
         });
         $("#init").click(function () {
           $.get("/init", function (data) {
-            $("#result-text").html(data);
+            $("#init-txt").html(data);
           });
         });
+        $("#envoyerPat").click(function () {
+          $("#ajout-txt").html(
+            "Requête envoyée pour ajouter un Patient dans la base de données!"
+          );
+        });
+        $("#envoyerPhar").click(function () {
+          $("#ajout-txt").html(
+            "Requête envoyée pour ajouter un Pharmacien dans la base de données!"
+          );
+        });
+        $("#envoyerMed").click(function () {
+          $("#ajout-txt").html(
+            "Requête envoyée pour ajouter un Médecin dans la base de données!"
+          );
+        });
       });
+    </script>
+    <script>
+      function toggleForm() {
+        var ajoutForms = document.getElementById("inscriptions-container");
+        var btnshowForm = document.getElementById("btnshowForm");
+        if (ajoutForms.style.display === "none") {
+          ajoutForms.style.display = "flex";
+          btnshowForm.innerHTML = "Cacher menu Ajout";
+        } else {
+          ajoutForms.style.display = "none";
+          btnshowForm.innerHTML = "Montrer menu Ajout";
+        }
+      }
     </script>
     <div class="tot-container">
       <header>
         <h1>INFO-H303 - Groupe 12</h1>
+        <button id="btnshowForm" onclick="toggleForm()">
+          Montrer menu Ajout
+        </button>
       </header>
       <div class="container">
         <div class="intro">
@@ -111,7 +142,127 @@
             <button id="creer">CRÉER</button
             ><button id="init">INITIALISER</button>
           </div>
+          <p id="init-txt">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim quis
+            dolore quia vero. Sed, vero.
+          </p>
         </div>
+        <div class="inscriptions-container" id="inscriptions-container">
+          <div class="flex-container">
+            <div class="inscription-patient-container">
+              <h2>Ajout d'un nouveau patient</h2>
+              <form method="POST" name="form_patient" action="/ajouter_patient">
+                <div class="inputs-container">
+                  <label for="NISS">NISS:</label>
+                  <input type="text" name="NISS" id="NISS" required />
+
+                  <label for="date_de_naissance">Date de naissance:</label>
+                  <input
+                    type="date"
+                    name="date_de_naissance"
+                    id="date_de_naissance"
+                    required
+                  />
+                  <label for="inami_medecin">INAMI médecin:</label>
+                  <input type="text" name="inami_medecin" id="inami_medecin" />
+
+                  <label for="inami_pharmacien">INAMI pharmacien:</label>
+                  <input
+                    type="text"
+                    name="inami_pharmacien"
+                    id="inami_pharmacien"
+                  />
+                  <label for="mail">Mail:</label>
+                  <input type="email" name="mail" id="mail" />
+
+                  <label for="nom">Nom:</label>
+                  <input type="text" name="nom" id="nom" required />
+
+                  <label for="prenom">Prénom:</label>
+                  <input type="text" name="prenom" id="prenom" required />
+
+                  <label for="telephone">Téléphone:</label>
+                  <input type="tel" name="telephone" id="telephone" />
+                </div>
+                <button type="submit" id="envoyerPat" value="Envoyer">
+                  Envoyer
+                </button>
+              </form>
+            </div>
+            <div class="inscription-pharmacien-container">
+              <h2>Ajout d'un nouveau pharmacien</h2>
+              <form
+                method="POST"
+                name="form_pharmacien"
+                action="/ajouter_pharmacien"
+              >
+                <div class="inputs-container">
+                  <label for="inami_pharma">INAMI pharmacien:</label>
+                  <input type="text" name="inami_pharma" id="inami_pharma" />
+                  <label for="mailpharma">Mail:</label>
+                  <input type="email" name="mailpharma" id="mailpharma" />
+
+                  <label for="nomPharma">Nom:</label>
+                  <input type="text" name="nomPharma" id="nomPharma" required />
+
+                  <label for="telephonePharma">Téléphone:</label>
+                  <input
+                    type="tel"
+                    name="telephonePharma"
+                    id="telephonePharma"
+                    required
+                  />
+                </div>
+                <button type="submit" id="envoyerPhar" value="Envoyer">
+                  Envoyer
+                </button>
+              </form>
+            </div>
+            <div class="inscription-medecin-container">
+              <h2>Ajout d'un nouveau médecin</h2>
+              <form method="POST" name="form_medecin" action="/ajouter_medecin">
+                <div class="inputs-container">
+                  <label for="inami_med">INAMI médecin:</label>
+                  <input type="text" name="inami_med" id="inami_med" />
+                  <label for="mailmed">Mail:</label>
+                  <input type="email" name="mailmed" id="mailmed" />
+
+                  <label for="nomMed">Nom:</label>
+                  <input type="text" name="nomMed" id="nomMed" required />
+
+                  <label for="telephoneMed">Téléphone:</label>
+                  <input
+                    type="tel"
+                    name="telephoneMed"
+                    id="telephoneMed"
+                    required
+                  />
+                  <label for="Specialite">Spécialité:</label>
+                  <input
+                    type="text"
+                    name="Specialite"
+                    id="Specialite"
+                    required
+                  />
+                </div>
+                <button type="submit" id="envoyerMed" value="Envoyer">
+                  Envoyer
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="ajout-result">
+            {% if message %}
+            <p id="ajout-txt">{{ message }}</p>
+            {% else %}
+            <p id="ajout-txt">
+              Remplisser le fomulaire pour ajouter un Patient, Pharmacien ou
+              Médecin dans la base de données!
+            </p>
+            {% endif %}
+          </div>
+        </div>
+
         <h2>Différentes requêtes:</h2>
         <div class="request-container">
           <div class="request">

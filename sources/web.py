@@ -28,9 +28,6 @@ def init():
     return i.init_db()
 
 
-# Route pour récupérer la chaîne de caractères 1
-
-
 @app.route("/get-string1", methods=["GET"])
 def get_string1():
     return (
@@ -109,6 +106,55 @@ def get_string10():
         "Requête 10: 'La liste de médicament n’étant plus prescrit depuis une date spécifique' <br>"
         + execute_requete("./Requetes/r10.sql")
     )
+
+
+@app.route("/", methods=["POST"])
+def reset():
+    val = request.form.get("Reset")
+    if val == "True":
+        return render_template("/")
+    else:
+        return render_template("/index.html")
+
+
+@app.route("/ajouter_patient", methods=["POST"])
+def ajouter_patient():
+    niss = request.form.get("NISS")
+    mail = request.form.get("mail")
+    Bdate = request.form.get("date_de_naissance")
+    nom = request.form.get("nom")
+    prenom = request.form.get("prenom")
+    inami_med = request.form.get("inami_medecin")
+    inami_pharma = request.form.get("inami_pharmacien")
+    tel = request.form.get("telephone")
+    print(niss, mail, Bdate, nom, prenom, inami_med, inami_pharma, tel)
+    return render_template(
+        "index.html",
+        message="Le patient a été ajouté dans la base de données avec succès!",
+    )
+
+
+@app.route("/ajouter_medecin", methods=["POST"])
+def ajouter_medecin():
+    inami = request.form.get("inami_med")
+    mail = request.form.get("mailmed")
+    nom = request.form.get("nomMed")
+    tel = request.form.get("telephoneMed")
+    specialite = request.form.get("Specialite")
+    print(inami, mail, nom, tel, specialite)
+    message = "Le médecin a été ajouté dans la base de données avec succès!"  # Message qui va être écrit dans le paragraphe en dessous (dire si erreur!)
+    return render_template("index.html", message=message)
+
+
+@app.route("/ajouter_pharmacien", methods=["POST"])
+def ajouter_pharmacien():
+    inami = request.form.get("inami_pharma")
+    mail = request.form.get("mailpharma")
+    nom = request.form.get("nomPharma")
+    tel = request.form.get("telephonePharma")
+    print(inami, mail, nom, tel)
+    message = "Le pharmacien a été ajouté dans la base de données avec succès!"
+    return render_template("index.html", message=message)
 
 
 if __name__ == "__main__":
