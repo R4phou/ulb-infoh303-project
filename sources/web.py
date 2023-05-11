@@ -149,10 +149,10 @@ def ajouter_patient():
     inami_med = request.form.get("inami_medecin")
     inami_pharma = request.form.get("inami_pharmacien")
     tel = request.form.get("telephone")
-    print(niss, mail, Bdate, nom, prenom, inami_med, inami_pharma, tel)
+    msg = insert_patient(niss, inami_med, inami_pharma, mail, Bdate, nom, prenom, tel)
     return render_template(
         "index.html",
-        message="Le patient a été ajouté dans la base de données avec succès!",
+        message=msg,
     )
 
 
@@ -164,8 +164,8 @@ def ajouter_medecin():
     tel = request.form.get("telephoneMed")
     specialite = request.form.get("Specialite")
     print(inami, mail, nom, tel, specialite)
-    message = "Le médecin a été ajouté dans la base de données avec succès!"  # Message qui va être écrit dans le paragraphe en dessous (dire si erreur!)
-    return render_template("index.html", message=message)
+    msg = insert_medecin(inami, mail, nom, tel, specialite)
+    return render_template("index.html", message=msg)
 
 
 @app.route("/ajouter_pharmacien", methods=["POST"])

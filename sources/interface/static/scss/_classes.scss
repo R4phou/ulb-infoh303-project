@@ -32,7 +32,7 @@
 }
 
 %bouton {
-  background: var(--gradient);
+  background: var(--darklight);
   margin: 1rem;
   padding: 1rem;
   width: 180px;
@@ -42,9 +42,10 @@
   align-items: center;
   border: 1px solid var(--text);
   border-radius: 10px;
-  color: white;
+  color: var(--text);
   &:hover {
     border-color: var(--light);
-    background: var(--gradient-reverse);
+    background: var(--light);
+    transition: 0.5s;
   }
 }

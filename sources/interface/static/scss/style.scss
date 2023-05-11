@@ -9,6 +9,8 @@
 
 button {
   @extend %bouton;
+  background-color: white;
+  color: var(--primary);
 }
 input {
   padding: 0.5rem;
@@ -35,6 +37,12 @@ h2 {
     margin: 2rem;
     button {
       @extend %bouton;
+      background-color: var(--primary);
+      color: white;
+      &:hover {
+        background-color: var(--light);
+        color: var(--primary);
+      }
     }
   }
 }
@@ -42,10 +50,10 @@ h2 {
 .inscriptions-container {
   display: flex;
   flex-direction: column;
-  background: var(--text);
+  background: var(--primary);
   color: white;
   .ajout-result {
-    background: var(--primary);
+    background: var(--darklight);
     margin: 0 35% 3rem 35%;
     border: 0.1rem solid var(--text);
     border-radius: 1.5rem;
@@ -62,7 +70,7 @@ h2 {
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
-    background: var(--text);
+    background: var(--primary);
     color: white;
     h2 {
       text-align: left;
@@ -100,6 +108,8 @@ h2 {
       }
       button {
         @extend %bouton;
+        background-color: white;
+        color: var(--primary);
       }
     }
     .inscription-patient-container {
@@ -115,12 +125,16 @@ h2 {
 }
 
 .connexion-patient {
-  background: #777;
+  background: var(--light);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  button:hover {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
   form {
     display: flex;
     justify-content: center;
@@ -136,6 +150,12 @@ h2 {
       flex: 0 1 auto;
     }
   }
+  .modif-container {
+    background: white;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 2rem;
+  }
   .patient-menu-container {
     display: flex;
     flex-direction: column;
@@ -147,9 +167,24 @@ h2 {
     }
     .info-med-container {
       display: flex;
+      background: var(--primary);
+      h3 {
+        color: white;
+      }
       flex-direction: column;
       align-items: center;
       width: 100%;
+      .info-med-debut {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+      }
+      button:hover {
+        background-color: var(--light);
+        color: var(--primary);
+        border-color: var(--primary);
+      }
       .output-text {
         width: 95%;
       }
@@ -174,6 +209,13 @@ h2 {
     }
     button {
       @extend %bouton;
+      background-color: var(--primary);
+      color: white;
+      &:hover {
+        background-color: white;
+        color: var(--primary);
+        border-color: var(--primary);
+      }
     }
   }
 }
@@ -200,21 +242,25 @@ h2 {
 header {
   display: flex;
   justify-content: center;
-  background: var(--text);
+  background: var(--primary);
   color: white;
   padding: 0rem;
+  h1 {
+    margin-right: 3rem;
+  }
   button {
     @extend %bouton;
-    margin-left: 15rem;
     flex: end;
     grid-area: "btn";
+    background: white;
+    color: var(--primary);
   }
 }
 
 footer {
   display: flex;
   justify-content: center;
-  background: var(--text);
+  background: var(--primary);
   color: white;
   padding: 2rem;
 }

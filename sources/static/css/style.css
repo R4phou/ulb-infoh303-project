@@ -58,7 +58,7 @@ form {
   font-family: var(--font-title); }
 
 button, .launch-container .btn-container button, .inscriptions-container .flex-container form button, .request-container .request button, header button {
-  background: var(--gradient);
+  background: var(--darklight);
   margin: 1rem;
   padding: 1rem;
   width: 180px;
@@ -68,10 +68,11 @@ button, .launch-container .btn-container button, .inscriptions-container .flex-c
   align-items: center;
   border: 1px solid var(--text);
   border-radius: 10px;
-  color: white; }
+  color: var(--text); }
   button:hover, .launch-container .btn-container button:hover, .inscriptions-container .flex-container form button:hover, .request-container .request button:hover {
     border-color: var(--light);
-    background: var(--gradient-reverse); }
+    background: var(--light);
+    transition: 0.5s; }
 
 .mx-1 {
   margin-left: 1rem;
@@ -95,6 +96,10 @@ button, .launch-container .btn-container button, .inscriptions-container .flex-c
 .tot-container {
   min-height: 100vh; }
 
+button {
+  background-color: white;
+  color: var(--primary); }
+
 input {
   padding: 0.5rem; }
 
@@ -116,14 +121,20 @@ h2 {
     flex-direction: space-between;
     justify-content: center;
     margin: 2rem; }
+    .launch-container .btn-container button {
+      background-color: var(--primary);
+      color: white; }
+      .launch-container .btn-container button:hover {
+        background-color: var(--light);
+        color: var(--primary); }
 
 .inscriptions-container {
   display: flex;
   flex-direction: column;
-  background: var(--text);
+  background: var(--primary);
   color: white; }
   .inscriptions-container .ajout-result {
-    background: var(--primary);
+    background: var(--darklight);
     margin: 0 35% 3rem 35%;
     border: 0.1rem solid var(--text);
     border-radius: 1.5rem;
@@ -137,7 +148,7 @@ h2 {
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
-    background: var(--text);
+    background: var(--primary);
     color: white; }
     .inscriptions-container .flex-container h2 {
       text-align: left;
@@ -169,6 +180,9 @@ h2 {
           background: var(--light);
           color: var(--text);
           flex: 0 1 auto; }
+      .inscriptions-container .flex-container form button {
+        background-color: white;
+        color: var(--primary); }
     .inscriptions-container .flex-container .inscription-patient-container {
       padding: 1rem 4rem; }
     .inscriptions-container .flex-container .inscription-pharmacien-container {
@@ -177,12 +191,15 @@ h2 {
       padding: 0 4rem 2rem 4rem; }
 
 .connexion-patient {
-  background: #777;
+  background: var(--light);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 2rem; }
+  align-items: center; }
+  .connexion-patient button:hover {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary); }
   .connexion-patient form {
     display: flex;
     justify-content: center;
@@ -196,6 +213,11 @@ h2 {
       background: var(--light);
       color: var(--text);
       flex: 0 1 auto; }
+  .connexion-patient .modif-container {
+    background: white;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 2rem; }
   .connexion-patient .patient-menu-container {
     display: flex;
     flex-direction: column;
@@ -206,9 +228,21 @@ h2 {
       text-align: justify; }
     .connexion-patient .patient-menu-container .info-med-container {
       display: flex;
+      background: var(--primary);
       flex-direction: column;
       align-items: center;
       width: 100%; }
+      .connexion-patient .patient-menu-container .info-med-container h3 {
+        color: white; }
+      .connexion-patient .patient-menu-container .info-med-container .info-med-debut {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%; }
+      .connexion-patient .patient-menu-container .info-med-container button:hover {
+        background-color: var(--light);
+        color: var(--primary);
+        border-color: var(--primary); }
       .connexion-patient .patient-menu-container .info-med-container .output-text {
         width: 95%; }
 
@@ -227,6 +261,13 @@ h2 {
     flex: 0 1 auto; }
     .request-container .request p {
       text-align: center; }
+    .request-container .request button {
+      background-color: var(--primary);
+      color: white; }
+      .request-container .request button:hover {
+        background-color: white;
+        color: var(--primary);
+        border-color: var(--primary); }
 
 .output {
   margin: 2rem;
@@ -247,17 +288,20 @@ h2 {
 header {
   display: flex;
   justify-content: center;
-  background: var(--text);
+  background: var(--primary);
   color: white;
   padding: 0rem; }
+  header h1 {
+    margin-right: 3rem; }
   header button {
-    margin-left: 15rem;
     flex: end;
-    grid-area: "btn"; }
+    grid-area: "btn";
+    background: white;
+    color: var(--primary); }
 
 footer {
   display: flex;
   justify-content: center;
-  background: var(--text);
+  background: var(--primary);
   color: white;
   padding: 2rem; }

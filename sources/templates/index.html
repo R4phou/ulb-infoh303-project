@@ -22,7 +22,6 @@
   </head>
   <body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script src="../request.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
@@ -142,7 +141,7 @@
     </script>
     <div class="tot-container">
       <header>
-        <h1>INFO-H303 - Groupe 12</h1>
+        <h1>INFO-H303 - Groupe AF</h1>
         <button id="btnshowForm" onclick="toggleForm()">
           Montrer menu Ajout
         </button>
@@ -178,70 +177,81 @@
               <h2>Ajout d'un nouveau patient</h2>
               <form method="POST" name="form_patient" action="/ajouter_patient">
                 <div class="inputs-container">
-                  <label for="NISS">NISS:</label>
-                  <input
-                    type="text"
-                    name="NISS"
-                    id="NISS"
-                    placeholder="NISS"
-                    required
-                  />
-
-                  <label for="date_de_naissance">Date de naissance:</label>
-                  <input
-                    type="date"
-                    name="date_de_naissance"
-                    id="date_de_naissance"
-                    required
-                  />
-                  <label for="inami_medecin">INAMI médecin:</label>
-                  <input
-                    type="text"
-                    name="inami_medecin"
-                    id="inami_medecin"
-                    placeholder="INAMI Médecin"
-                  />
-
-                  <label for="inami_pharmacien">INAMI pharmacien:</label>
-                  <input
-                    type="text"
-                    name="inami_pharmacien"
-                    id="inami_pharmacien"
-                    placeholder="INAMI Pharmacien"
-                  />
-                  <label for="mail">Mail:</label>
-                  <input
-                    type="email"
-                    name="mail"
-                    id="mail"
-                    placeholder="Adresse Mail"
-                  />
-
-                  <label for="nom">Nom:</label>
-                  <input
-                    type="text"
-                    name="nom"
-                    id="nom"
-                    placeholder="Nom"
-                    required
-                  />
-
-                  <label for="prenom">Prénom:</label>
-                  <input
-                    type="text"
-                    name="prenom"
-                    id="prenom"
-                    placeholder="Prénom"
-                    required
-                  />
-
-                  <label for="telephone">Téléphone:</label>
-                  <input
-                    type="tel"
-                    name="telephone"
-                    id="telephone"
-                    placeholder="Numéro de téléphone"
-                  />
+                  <div class="input-container">
+                    <label for="NISS">NISS:</label>
+                    <input
+                      type="text"
+                      name="NISS"
+                      id="NISS"
+                      placeholder="NISS"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="date_de_naissance">Date de naissance:</label>
+                    <input
+                      type="date"
+                      name="date_de_naissance"
+                      id="date_de_naissance"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="inami_medecin">INAMI médecin:</label>
+                    <input
+                      type="text"
+                      name="inami_medecin"
+                      id="inami_medecin"
+                      placeholder="INAMI Médecin"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="inami_pharmacien">INAMI pharmacien:</label>
+                    <input
+                      type="text"
+                      name="inami_pharmacien"
+                      id="inami_pharmacien"
+                      placeholder="INAMI Pharmacien"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="mail">Mail:</label>
+                    <input
+                      type="email"
+                      name="mail"
+                      id="mail"
+                      placeholder="Adresse Mail"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="nom">Nom:</label>
+                    <input
+                      type="text"
+                      name="nom"
+                      id="nom"
+                      placeholder="Nom"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="prenom">Prénom:</label>
+                    <input
+                      type="text"
+                      name="prenom"
+                      id="prenom"
+                      placeholder="Prénom"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="telephone">Téléphone:</label>
+                    <input
+                      type="tel"
+                      name="telephone"
+                      id="telephone"
+                      placeholder="Numéro de téléphone"
+                    />
+                  </div>
                 </div>
                 <button type="submit" id="envoyerPat" value="Envoyer">
                   Envoyer
@@ -256,38 +266,44 @@
                 action="/ajouter_pharmacien"
               >
                 <div class="inputs-container">
-                  <label for="inami_pharma">INAMI pharmacien:</label>
-                  <input
-                    type="text"
-                    name="inami_pharma"
-                    id="inami_pharma"
-                    placeholder="INAMI"
-                  />
-                  <label for="mailpharma">Mail:</label>
-                  <input
-                    type="email"
-                    name="mailpharma"
-                    id="mailpharma"
-                    placeholder="Adresse mail"
-                  />
-
-                  <label for="nomPharma">Nom:</label>
-                  <input
-                    type="text"
-                    name="nomPharma"
-                    id="nomPharma"
-                    placeholder="Nom"
-                    required
-                  />
-
-                  <label for="telephonePharma">Téléphone:</label>
-                  <input
-                    type="tel"
-                    name="telephonePharma"
-                    id="telephonePharma"
-                    placeholder="Numéro de téléphone"
-                    required
-                  />
+                  <div class="input-container">
+                    <label for="inami_pharma">INAMI pharmacien:</label>
+                    <input
+                      type="text"
+                      name="inami_pharma"
+                      id="inami_pharma"
+                      placeholder="INAMI"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="mailpharma">Mail:</label>
+                    <input
+                      type="email"
+                      name="mailpharma"
+                      id="mailpharma"
+                      placeholder="Adresse mail"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="nomPharma">Nom:</label>
+                    <input
+                      type="text"
+                      name="nomPharma"
+                      id="nomPharma"
+                      placeholder="Nom"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="telephonePharma">Téléphone:</label>
+                    <input
+                      type="tel"
+                      name="telephonePharma"
+                      id="telephonePharma"
+                      placeholder="Numéro de téléphone"
+                      required
+                    />
+                  </div>
                 </div>
                 <button type="submit" id="envoyerPhar" value="Envoyer">
                   Envoyer
@@ -298,46 +314,54 @@
               <h2>Ajout d'un nouveau médecin</h2>
               <form method="POST" name="form_medecin" action="/ajouter_medecin">
                 <div class="inputs-container">
-                  <label for="inami_med">INAMI médecin:</label>
-                  <input
-                    type="text"
-                    name="inami_med"
-                    id="inami_med"
-                    placeholder="INAMI"
-                  />
-                  <label for="mailmed">Mail:</label>
-                  <input
-                    type="email"
-                    name="mailmed"
-                    id="mailmed"
-                    placeholder="Adresse mail"
-                  />
-
-                  <label for="nomMed">Nom:</label>
-                  <input
-                    type="text"
-                    name="nomMed"
-                    id="nomMed"
-                    placeholder="Nom"
-                    required
-                  />
-
-                  <label for="telephoneMed">Téléphone:</label>
-                  <input
-                    type="tel"
-                    name="telephoneMed"
-                    id="telephoneMed"
-                    placeholder="Numéro de téléphone"
-                    required
-                  />
-                  <label for="Specialite">Spécialité:</label>
-                  <input
-                    type="text"
-                    name="Specialite"
-                    id="Specialite"
-                    placeholder="Spécialité"
-                    required
-                  />
+                  <div class="input-container">
+                    <label for="inami_med">INAMI médecin:</label>
+                    <input
+                      type="text"
+                      name="inami_med"
+                      id="inami_med"
+                      placeholder="INAMI"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="mailmed">Mail:</label>
+                    <input
+                      type="email"
+                      name="mailmed"
+                      id="mailmed"
+                      placeholder="Adresse mail"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="nomMed">Nom:</label>
+                    <input
+                      type="text"
+                      name="nomMed"
+                      id="nomMed"
+                      placeholder="Nom"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="telephoneMed">Téléphone:</label>
+                    <input
+                      type="tel"
+                      name="telephoneMed"
+                      id="telephoneMed"
+                      placeholder="Numéro de téléphone"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="Specialite">Spécialité:</label>
+                    <input
+                      type="text"
+                      name="Specialite"
+                      id="Specialite"
+                      placeholder="Spécialité"
+                      required
+                    />
+                  </div>
                 </div>
                 <button type="submit" id="envoyerMed" value="Envoyer">
                   Envoyer
@@ -374,16 +398,34 @@
             </button>
           </form>
           <button id="getinfo">Récupérer les informations</button>
+          <p id="connexion-txt">
+            Remplisser le fomulaire pour ajouter un Patient, Pharmacien ou
+            Médecin dans la base de données!
+          </p>
+          <div class="modif-container">
+            <h2>Modifier vos médecin et pharmacien de référence</h2>
+            <form action="/modif-inami" method="POST" name="form-modif-inami">
+              <div class="input-container">
+                <input
+                  type="text"
+                  placeholder="Nouvel INAMI pharmacien"
+                  id="new_inami_phar"
+                />
+                <input
+                  type="text"
+                  placeholder="Nouvel INAMI médecin"
+                  id="new_inami_med"
+                />
+              </div>
+              <button type="submit" id="modif-inami">Modifier</button>
+            </form>
+          </div>
           <div class="patient-menu-container">
-            <p id="connexion-txt">
-              Remplisser le fomulaire pour ajouter un Patient, Pharmacien ou
-              Médecin dans la base de données!
-            </p>
             <div class="info-med-container">
-              <h3>Vos informations médicales</h3>
-              <button id="btninfomedicalespatient">
-                Récupérez vos informations médicales
-              </button>
+              <div class="info-med-debut">
+                <h3>Vos informations médicales</h3>
+                <button id="btninfomedicalespatient">GET</button>
+              </div>
               <div class="output-text">
                 <p id="infomedicalespatient">
                   Ici s'affichent les informations médicales
@@ -436,7 +478,7 @@
           </div>
         </div>
         <div class="output">
-          <h2>Résultat de la requête:</h2>
+          <h2>Résultats de la requête:</h2>
           <div class="output-text">
             <p class="result-text" id="result-text">
               Ici s'affichera le résultat de la requête.
