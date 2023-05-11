@@ -136,7 +136,6 @@ def connexion_patient():
     if niss != None:
         global PATIENT
         PATIENT = niss
-        # TO DO RECUPERER LE MEDECIN ET PHARMACIEN DE REFERENCE DU PATIENT
     return render_template("index.html")
 
 
