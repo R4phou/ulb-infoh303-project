@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request  # pip install flask
-from utiles import *
+from con_patient import *
 
 app = Flask(__name__)
 
@@ -112,12 +112,7 @@ def get_string10():
 
 @app.route("/getinfo", methods=["GET"])
 def get_info():
-    # TO DO : Récupérer les informations du patient
-    return (
-        "Bienvenue patient "
-        + str(PATIENT)
-        + " ! <br> Votre médecin de référence est : TO ADD <br> votre pharmacien de référence est : TO ADD"
-    )
+    return select_patient_info(PATIENT)
 
 
 @app.route("/get-infomedpatient", methods=["GET"])
