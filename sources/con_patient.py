@@ -73,7 +73,6 @@ def insert_medecin(inami, mail, nom, tel, spec):
             + ")"
         )
         cursor.execute(requete)
-
         result = "Médecin " + str(inami) + "ajouté avec succès"
     except:
         result = "Le médecin n'a pas pu être ajouté à la base de données."
@@ -101,4 +100,16 @@ def insert_pharmacien(inami, mail, nom, tel):
         result = "Pharmacien " + str(inami) + "ajouté avec succès"
     except:
         result = "Le pharmacien n'a pas pu être ajouté à la base de données."
+    return result
+
+
+def modif_inami_patient(patient, inami_med, inami_phar):
+    cursor = db.cursor()
+    if inami_med != None:
+        # INSERT MED
+        var = 1
+    if inami_phar != None:
+        # INSERT PHAR
+        var = 1
+    result = "Le pharmacien n'a pas pu être ajouté à la base de données."
     return result

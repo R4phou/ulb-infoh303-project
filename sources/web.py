@@ -139,6 +139,14 @@ def connexion_patient():
     return render_template("index.html")
 
 
+@app.route("/modif-inami", methods=["POST"])
+def modif_inami():
+    inami_phar = request.form.get("new_inami_phar")
+    inami_med = request.form.get("new_inami_med")
+    msg = modif_inami_patient(PATIENT, inami_med, inami_phar)
+    return render_template("index.html", message=msg)
+
+
 @app.route("/ajouter_patient", methods=["POST"])
 def ajouter_patient():
     niss = request.form.get("NISS")
