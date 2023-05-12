@@ -3,11 +3,6 @@ from con_patient import *
 
 app = Flask(__name__)
 
-# Définition des chaînes de caractères à afficher
-string1 = "Bonjour!"
-string2 = "Comment ça va ?"
-string3 = "Quelle heure est-il ?"
-
 PATIENT = 2017845529
 
 
@@ -112,7 +107,7 @@ def get_string10():
 
 @app.route("/getinfo", methods=["GET"])
 def get_info():
-    return select_patient_info(PATIENT)
+    return
 
 
 @app.route("/get-infomedpatient", methods=["GET"])
@@ -133,18 +128,22 @@ def reset():
 @app.route("/connexion-patient", methods=["POST"])
 def connexion_patient():
     niss = request.form.get("NISSPatient")
-    if niss != None:
+    if niss is not None:
         global PATIENT
         PATIENT = niss
-    return render_template("index.html")
+        msg2 = select_patient_info(niss)
+    else:
+        msg2 = "Patient non trouvé !"
+    return render_template("index.html", msg2=msg2)
 
 
 @app.route("/modif-inami", methods=["POST"])
 def modif_inami():
-    inami_phar = request.form.get("new_inami_phar")
-    inami_med = request.form.get("new_inami_med")
+    inami_phar = request.form.get("newinamiphar")
+    inami_med = request.form.get("newinamimed")
+    print(inami_phar, inami_med)
     msg = modif_inami_patient(PATIENT, inami_med, inami_phar)
-    return render_template("index.html", message=msg)
+    return render_template("index.html", msg=msg)
 
 
 @app.route("/ajouter_patient", methods=["POST"])
