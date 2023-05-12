@@ -53,25 +53,28 @@ def line_to_data(mapping, dico):
         mapping[k]: dico[k] for k in mapping.keys() if k in dico and dico[k] != "NULL"
     }
 
-
 def insert_xml(path, mapping, name):
     print("Inserting " + name + " ...")
     root = load_xml_file(path)
-    l = []
+
     for data in root:
         item = get_data_as_dictionary(data)
-        values = line_to_data(mapping, item)
-        if name == "Patient":
-            birth_date = values["Bdate"]
-            values["Bdate"] = format_to_date(birth_date)
-        if name == "Diagnostic":
-            birth_date = values["BirthDate"]
-            values["BirthDate"] = format_to_date(birth_date)
-            diag_date = values["date"]
-            values["date"] = format_to_date(diag_date)
-        if values not in l:
-            l.append(values)
-    insert_list(l, name)
+        #item: {key : [a,b,c]}
+        lines = flatMapping(item)
+        for data in lines:
+            l = []
+            values = line_to_data(mapping, data)
+            if name == "Patient":
+                birth_date = values["Bdate"]
+                values["Bdate"] = format_to_date(birth_date)
+            if name == "Diagnostic":
+                birth_date = values["BirthDate"]
+                values["BirthDate"] = format_to_date(birth_date)
+                diag_date = values["date"]
+                values["date"] = format_to_date(diag_date)
+            if values not in l:
+                l.append(values)
+            insert_list(l, name)
     print("Table " + name + " inserted")
     db.commit()
 

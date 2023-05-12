@@ -108,7 +108,10 @@ def get_data_as_dictionary(patient):
         value = attribute.text
         if value == None:
             value = "NULL"
-        dictionnary_patient.update({attribute.tag: value})
+        if attribute.tag in dictionnary_patient:
+            dictionnary_patient[attribute.tag].append(value)
+        else:
+            dictionnary_patient.update({attribute.tag: [value]})
     return dictionnary_patient
 
 
@@ -141,7 +144,44 @@ def values_to_str(value):
             result += ","
     return result
 
+"""
+Transforme un dictionnaire de la forme
+    {key1 : [a,b,c], key2 : [d,e,f]} 
+ en une liste de dictionnaires de la forme
+    [{'key1': 'a', 'key2': 'd'}, {'key1': 'a', 'key2': 'e'}, {'key1': 'a', 'key2': 'f'},
+      {'key1': 'b', 'key2': 'd'}, {'key1': 'b', 'key2': 'e'}, {'key1': 'b', 'key2': 'f'},
+        {'key1': 'c', 'key2': 'd'}, {'key1': 'c', 'key2': 'e'}, {'key1': 'c', 'key2': 'f'}]
+"""
+def flatMapping(dico):
+    #item: {key1 : [a,b,c], key2 : [d,e,f]}
+    result = []
+    matrixValues = []
+    #Crée une matrice avec les valeurs
+    for key in dico.keys():
+        matrixValues.append(dico[key])
+    
+    depth = len(matrixValues)
+    result = []
+    recursive_flatening(matrixValues,depth,0,list(dico.keys()),result)
+    return result
+    #return ({key1 : a, key2 : d}, {key1 : b, key2 : e}, {key1 : c, key2 : f})
+
+"""fonction récursive utilisée lors de la création de la liste de dictionnaires"""
+def recursive_flatening(matrix,maxDepht,currentDepth,keyList,listDicos,memoDico = {}):
+    if currentDepth >= maxDepht:
+        listDicos.append(memoDico.copy())
+        return
+    else:
+        for i in range(len(matrix[currentDepth])):
+            #print(matrix[currentDepth][i])
+            memoDico.update({keyList[currentDepth] : matrix[currentDepth][i]})
+            recursive_flatening(matrix,maxDepht,currentDepth+1,keyList,listDicos,memoDico)
+
+def recombinate():
+    pass
 
 if __name__ == "__main__":
     print("This file is not meant to be executed")
-    print(load_csv_file("Données/dossiers_patients.csv"))
+    #print(load_csv_file("Données/dossiers_patients.csv"))
+    dicotTest = {'key1' : ['a','b','c'], 'key2' : ['d','e','f','g'],'key3' : ['h','i','j']}
+    print(flatMapping(dicotTest))
