@@ -3,11 +3,11 @@ from mappings import *
 
 # Noms des tables de la base de données "systeme_medical"
 TABLE_NAMES = [
-    "Patient",
+    "SpecSystAnat",
     "Medecin",
     "Pharmacien",
+    "Patient",
     "Medicament",
-    "SpecSystAnat",
     "Pathologie",
     "Diagnostic",
     "DossierPatient",
@@ -29,7 +29,7 @@ def reset_table_data(table):
 
 
 def reset_all_tables():
-    for table in TABLE_NAMES:
+    for table in reversed(TABLE_NAMES):
         reset_table_data(table)
 
 
