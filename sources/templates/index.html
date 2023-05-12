@@ -97,11 +97,6 @@
             "Requête envoyée pour ajouter un Patient dans la base de données!"
           );
         });
-        $("#getinfo").click(function () {
-          $.get("/getinfo", function (data) {
-            $("#connexion-txt").html(data);
-          });
-        });
         $("#envoyerPhar").click(function () {
           $("#ajout-txt").html(
             "Requête envoyée pour ajouter un Pharmacien dans la base de données!"
@@ -166,10 +161,7 @@
             <button id="creer">CRÉER</button
             ><button id="init">INITIALISER</button>
           </div>
-          <p id="init-txt">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim quis
-            dolore quia vero. Sed, vero.
-          </p>
+          <p id="init-txt"></p>
         </div>
         <div class="inscriptions-container" id="inscriptions-container">
           <div class="flex-container">
@@ -397,11 +389,9 @@
               Se connecter
             </button>
           </form>
-          <button id="getinfo">Récupérer les informations</button>
-          <p id="connexion-txt">
-            Remplisser le fomulaire pour ajouter un Patient, Pharmacien ou
-            Médecin dans la base de données!
-          </p>
+          {% if msg2 %}
+          <p id="ajout-txt">{{ msg2 }}</p>
+          {% endif %}
           <div class="modif-container">
             <h2>Modifier vos médecin et pharmacien de référence</h2>
             <form action="/modif-inami" method="POST" name="form-modif-inami">
@@ -409,16 +399,19 @@
                 <input
                   type="text"
                   placeholder="Nouvel INAMI pharmacien"
-                  id="new_inami_phar"
+                  id="newinamiphar"
                 />
                 <input
                   type="text"
                   placeholder="Nouvel INAMI médecin"
-                  id="new_inami_med"
+                  id="newinamimed"
                 />
               </div>
               <button type="submit" id="modif-inami">Modifier</button>
             </form>
+            {% if msg %}
+            <p id="ajout-txt">{{ msg }}</p>
+            {% endif %}
           </div>
           <div class="patient-menu-container">
             <div class="info-med-container">
