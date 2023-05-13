@@ -400,14 +400,16 @@
                   type="text"
                   placeholder="Nouvel INAMI pharmacien"
                   id="newinamiphar"
+                  name="newinamiphar"
                 />
                 <input
                   type="text"
                   placeholder="Nouvel INAMI médecin"
                   id="newinamimed"
+                  name="newinamimed"
                 />
+                <button type="submit" id="modif-inami">Modifier</button>
               </div>
-              <button type="submit" id="modif-inami">Modifier</button>
             </form>
             {% if msg %}
             <p id="ajout-txt">{{ msg }}</p>
