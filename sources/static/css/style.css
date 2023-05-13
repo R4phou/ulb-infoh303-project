@@ -191,11 +191,19 @@ h2 {
       padding: 0 4rem 2rem 4rem; }
 
 .connexion-patient {
-  background: var(--light);
+  background: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; }
+  .connexion-patient pre {
+    background: var(--light);
+    color: var(--text);
+    padding: 1rem;
+    border: 0.1rem solid var(--text);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem var(--text);
+    margin: 1rem; }
   .connexion-patient button:hover {
     background-color: var(--primary);
     color: white;
@@ -215,7 +223,6 @@ h2 {
       flex: 0 1 auto; }
   .connexion-patient .modif-container {
     background: white;
-    width: 100%;
     margin: 0;
     padding-bottom: 2rem; }
   .connexion-patient .patient-menu-container {

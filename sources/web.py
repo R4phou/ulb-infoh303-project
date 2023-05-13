@@ -105,33 +105,21 @@ def get_string10():
     )
 
 
-@app.route("/getinfo", methods=["GET"])
-def get_info():
-    return
-
-
 @app.route("/get-infomedpatient", methods=["GET"])
 def get_infomedpatient():
     # TO DO : Récupérer les informations médicales du patient
     return "Informations du patients: " + str(PATIENT)
 
 
-@app.route("/", methods=["POST"])
-def reset():
-    val = request.form.get("Reset")
-    if val == "True":
-        return render_template("/")
-    else:
-        return render_template("/index.html")
-
-
 @app.route("/connexion-patient", methods=["POST"])
 def connexion_patient():
     niss = request.form.get("NISSPatient")
+    print("Niss récupéré:", niss)
     if niss is not None:
         global PATIENT
         PATIENT = niss
         msg2 = select_patient_info(niss)
+        print(msg2)
     else:
         msg2 = "Patient non trouvé !"
     return render_template("index.html", msg2=msg2)

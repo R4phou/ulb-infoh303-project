@@ -2,16 +2,15 @@ from utiles import *
 
 
 db = get_connection(False)
+cursor = db.cursor()
 
 
 def check_patient(niss):
-    cursor = db.cursor()
     print(niss)
     if niss == None:
         return False
     try:
         cursor.execute("SELECT niss FROM patient WHERE niss = '" + str(niss) + "'")
-        cursor.close()
         return True
     except:
         return False
@@ -19,14 +18,12 @@ def check_patient(niss):
 
 def select_patient_info(niss):
     try:
-        cursor = db.cursor()
         query = "SELECT INAMImed, INAMIPhar FROM patient WHERE NISS = " + str(niss)
         cursor.execute(query)
-        result = "Bienvenue Patient " + str(niss) + "<br>"
+        result = "Bienvenue Patient " + str(niss) + "\n"
         for element in cursor:
-            result += "Médecin de référence: " + str(element[0]) + "<br>"
+            result += "Médecin de référence: " + str(element[0]) + "\n"
             result += "Pharmacien de référence: " + str(element[1])
-        cursor.close()
     except:
         result = "Données du patient " + str(niss) + " non trouvées"
     return result
@@ -38,7 +35,6 @@ def insert_patient(niss, inami_med, inami_pharma, mail, Bdate, nom, prenom, tel)
     if mail == None:
         mail = ""
     try:
-        cursor = db.cursor()
         requete = (
             "INSERT INTO patient (NISS, Lname, Fname, Bdate, Email, Phone, INAMImed, INAMIphar) VALUES ("
             + str(niss)
@@ -59,7 +55,6 @@ def insert_patient(niss, inami_med, inami_pharma, mail, Bdate, nom, prenom, tel)
             + ")"
         )
         cursor.execute(requete)
-        cursor.close()
         result = "Patient " + str(niss) + "ajouté avec succès"
     except:
         result = "Le patient n'a pas pu être ajouté à la base de données."
@@ -70,7 +65,6 @@ def insert_medecin(inami, mail, nom, tel, spec):
     if mail == None:
         mail = ""
     try:
-        cursor = db.cursor()
         requete = (
             "INSERT INTO medecin (INAMI, Lname, Email, Phone, Speciality) VALUES ("
             + str(inami)
@@ -85,7 +79,6 @@ def insert_medecin(inami, mail, nom, tel, spec):
             + ")"
         )
         cursor.execute(requete)
-        cursor.close()
         result = "Médecin " + str(inami) + "ajouté avec succès"
     except:
         result = "Le médecin n'a pas pu être ajouté à la base de données."
@@ -96,7 +89,6 @@ def insert_pharmacien(inami, mail, nom, tel):
     if mail == None:
         mail = ""
     try:
-        cursor = db.cursor()
         requete = (
             "INSERT INTO pharmacien (INAMI, Lname, Email, Phone) VALUES ("
             + str(inami)
@@ -109,7 +101,6 @@ def insert_pharmacien(inami, mail, nom, tel):
             + ")"
         )
         cursor.execute(requete)
-        cursor.close()
         result = "Pharmacien " + str(inami) + "ajouté avec succès"
     except:
         result = "Le pharmacien n'a pas pu être ajouté à la base de données."
@@ -117,10 +108,9 @@ def insert_pharmacien(inami, mail, nom, tel):
 
 
 def modif_inami_patient(patient, inami_med, inami_phar):
-    result = "Aucun médecin ou pharmacien n'a été ajouté."
+    result = "Bienvenue Patient " + str(patient) + "\n"
     if inami_med != None:
         try:
-            cursor = db.cursor()
             query = (
                 "UPDATE patient SET INAMImed = '"
                 + str(inami_med)
@@ -130,17 +120,15 @@ def modif_inami_patient(patient, inami_med, inami_phar):
             )
             print(query)
             cursor.execute(query)
-            result = (
-                "Médecin de référence modifié avec succès <br> Votre nouveau médecin de référence est: "
+            result += (
+                "Médecin de référence modifié avec succès \nVotre nouveau médecin de référence est: "
                 + str(inami_med)
-                + "<br>"
+                + "\n"
             )
-            cursor.close()
         except:
-            result = "Rien n'a pas pu être ajouté à la base de données."
+            result += "Le médecin n'a pas pu être modifié dans la base de données. \n"
     if inami_phar != None:
         try:
-            cursor = db.cursor()
             query = (
                 "UPDATE patient SET INAMIphar = '"
                 + str(inami_phar)
@@ -150,14 +138,13 @@ def modif_inami_patient(patient, inami_med, inami_phar):
             )
             print(query)
             cursor.execute(query)
-            result = (
-                "Médecin de référence modifié avec succès <br> Votre nouveau médecin de référence est: "
+            result += (
+                "Pharmacien de référence modifié avec succès \nVotre nouveau pharmacien de référence est: "
                 + str(inami_phar)
-                + "<br>"
+                + "\n"
             )
-            cursor.close()
         except:
-            result = "Rien n'a pas pu être ajouté à la base de données."
+            result += "Le pharmacien n'a pas pu être modifié à la base de données.\n"
     return result
 
 
