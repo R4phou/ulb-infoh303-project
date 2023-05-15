@@ -170,8 +170,8 @@ def ajouter_pharmacien():
     nom = request.form.get("nomPharma")
     tel = request.form.get("telephonePharma")
     print(inami, mail, nom, tel)
-    message = "Le pharmacien a été ajouté dans la base de données avec succès!"
-    return render_template("index.html", message=message)
+    msg = insert_pharmacien(inami, mail, nom, tel)
+    return render_template("index.html", message=msg)
 
 
 if __name__ == "__main__":

@@ -55,6 +55,7 @@ def insert_patient(niss, inami_med, inami_pharma, mail, Bdate, nom, prenom, tel)
             + ")"
         )
         cursor.execute(requete)
+        db.commit()
         result = "Patient " + str(niss) + "ajouté avec succès"
     except:
         result = "Le patient n'a pas pu être ajouté à la base de données."
@@ -79,6 +80,7 @@ def insert_medecin(inami, mail, nom, tel, spec):
             + ")"
         )
         cursor.execute(requete)
+        db.commit()
         result = "Médecin " + str(inami) + "ajouté avec succès"
     except:
         result = "Le médecin n'a pas pu être ajouté à la base de données."
@@ -101,6 +103,7 @@ def insert_pharmacien(inami, mail, nom, tel):
             + ")"
         )
         cursor.execute(requete)
+        db.commit()
         result = "Pharmacien " + str(inami) + "ajouté avec succès"
     except:
         result = "Le pharmacien n'a pas pu être ajouté à la base de données."
@@ -120,6 +123,7 @@ def modif_inami_patient(patient, inami_med, inami_phar):
             )
             print(query)
             cursor.execute(query)
+            db.commit()
             result += (
                 "Médecin de référence modifié avec succès \nVotre nouveau médecin de référence est: "
                 + str(inami_med)
@@ -138,6 +142,7 @@ def modif_inami_patient(patient, inami_med, inami_phar):
             )
             print(query)
             cursor.execute(query)
+            db.commit()
             result += (
                 "Pharmacien de référence modifié avec succès \nVotre nouveau pharmacien de référence est: "
                 + str(inami_phar)
