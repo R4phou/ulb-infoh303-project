@@ -52,7 +52,7 @@ def get_string3():
 @app.route("/get-string4", methods=["GET"])
 def get_string4():
     return (
-        "Requête 4: 'Tous les utilisateurs ayant consommé un médicament spécifique (sous son nom commercial) après une date donnée, par exemple en cas de rappel de produit pour lot contaminé'<br>"
+        "Requête 4: 'Tous les utilisateurs ayant consommé un médicament spécifique (sous son nom commercial) après une date donnée, par exemple en cas de rappel de produit pour lot contaminé (Acinax après 01/01/1980)'<br>"
         + execute_requete("./sources/Requetes/r4.sql")
     )
 

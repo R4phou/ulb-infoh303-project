@@ -1,6 +1,6 @@
-SELECT Patient.NISS, Patient.Lname, Patient.Fname
-FROM DossierPatient
-JOIN Patient ON DossierPatient.NISSPatient = Patient.NISS
-JOIN Medicament ON DossierPatient.DCI = Medicament.DCI
-WHERE Medicament.NomCom = 'nom_du_medicament'
-AND DossierPatient.dateVente > 'date_donnee';
+SELECT distinct p.NISS, p.Lname, p.Fname
+FROM DossierPatient d
+JOIN Patient p ON d.NISSPatient = p.NISS
+JOIN Medicament m ON d.DCI = m.DCI
+WHERE m.NomCom = 'Acinax'
+AND d.dateVente > '1980-01-01';
