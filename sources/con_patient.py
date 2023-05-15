@@ -3,7 +3,7 @@ from utiles import *
 
 db = get_connection(False)
 cursor = db.cursor()
-
+# db.autocommit(True) #permet faire des commits auto lorsqu'une modif est apportée à la database 
 
 def check_patient(niss):
     print(niss)
@@ -38,15 +38,15 @@ def insert_patient(niss, inami_med, inami_pharma, mail, Bdate, nom, prenom, tel)
         requete = (
             "INSERT INTO patient (NISS, Lname, Fname, Bdate, Email, Phone, INAMImed, INAMIphar) VALUES ("
             + str(niss)
-            + " , "
+            + " ,'"
             + str(nom)
-            + ", "
+            + "', '"
             + str(prenom)
-            + ", "
+            + "','"
             + str(Bdate)
-            + ", "
+            + "','"
             + str(mail)
-            + ", "
+            + "', "
             + str(tel)
             + ", "
             + str(inami_med)
@@ -54,9 +54,10 @@ def insert_patient(niss, inami_med, inami_pharma, mail, Bdate, nom, prenom, tel)
             + str(inami_pharma)
             + ")"
         )
+        print(requete)
         cursor.execute(requete)
         db.commit()
-        result = "Patient " + str(niss) + "ajouté avec succès"
+        result = "Patient " + str(niss) + " ajouté avec succès"
     except:
         result = "Le patient n'a pas pu être ajouté à la base de données."
     return result
