@@ -1,7 +1,6 @@
-SELECT p.NomPath, p.NomSpec
-FROM pathologie p
-WHERE p.NomSpec IN 
-  (SELECT NomSpec 
-  FROM specsystanat 
-  GROUP BY NomSpec 
-  HAVING COUNT(DISTINCT NomSystAnat) = 1)
+SELECT Medecin.Speciality, COUNT(DossierPatient.NomComMedicament) AS PrescriptionCount
+FROM Medecin
+JOIN DossierPatient ON Medecin.INAMI = DossierPatient.InamiMed
+GROUP BY Medecin.Speciality
+ORDER BY PrescriptionCount DESC
+LIMIT 1;
