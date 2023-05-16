@@ -52,18 +52,24 @@ h2 {
   flex-direction: column;
   background: var(--primary);
   color: white;
-  .ajout-result {
+  pre {
+    background: var(--darklight);
+    border: 0.1rem solid var(--text);
+    border-radius: 1.5rem;
+    box-shadow: 0 0 1rem var(--text);
+    text-align: left;
+    padding: 2rem;
+    margin: 0 5% 3rem 5%;
+  }
+  p {
     background: var(--darklight);
     margin: 0 35% 3rem 35%;
     border: 0.1rem solid var(--text);
     border-radius: 1.5rem;
     box-shadow: 0 0 1rem var(--text);
-    p {
-      padding: 2rem;
-      text-align: center;
-    }
+    text-align: left;
+    padding: 2rem;
   }
-
   .flex-container {
     display: flex;
     flex-direction: column;
