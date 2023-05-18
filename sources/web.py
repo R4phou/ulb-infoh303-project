@@ -69,7 +69,7 @@ def get_string5():
 def get_string6():
     return (
         "Requête 6: 'La liste des médecins ayant prescrit des médicaments ne relevant pas de leur spécialité'<br>"
-        + execute_requete("./sources/Requetes/r6.sql")
+        + execute_requete("./sources/Requetes/r6b.sql")
     )
 
 
