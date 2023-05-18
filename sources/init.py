@@ -53,13 +53,13 @@ def line_to_data(mapping, dico):
         mapping[k]: dico[k] for k in mapping.keys() if k in dico and dico[k] != "NULL"
     }
 
+
 def insert_xml(path, mapping, name):
     print("Inserting " + name + " ...")
     root = load_xml_file(path)
-
     for data in root:
         item = get_data_as_dictionary(data)
-        #item: {key : [a,b,c]}
+        # item: {key : [a,b,c]}
         lines = flatMapping(item)
         for data in lines:
             l = []
