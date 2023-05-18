@@ -27,7 +27,9 @@ patient_query = """CREATE TABLE Patient
     Email VARCHAR(50),
     Phone VARCHAR(50),
     INAMImed BIGINT NOT NULL,
-    INAMIphar BIGINT NOT NULL
+    INAMIphar BIGINT NOT NULL,
+    FOREIGN KEY (INAMImed) REFERENCES Medecin(INAMI),
+    FOREIGN KEY (INAMIphar) REFERENCES Pharmacien(INAMI)
     )"""
 
 speciality_query = """CREATE TABLE SpecSystAnat
