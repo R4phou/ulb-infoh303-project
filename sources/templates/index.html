@@ -126,6 +126,7 @@
           data: { contenu: inputContent },
           success: function (response) {
             document.getElementById("result-text").innerHTML = response;
+            document.getElementById("dci").value = "";
           },
         });
       }
@@ -138,6 +139,7 @@
           data: { contenu: inputContent },
           success: function (response) {
             document.getElementById("result-text").innerHTML = response;
+            document.getElementById("dater10").value = "";
           },
         });
       }
@@ -151,6 +153,8 @@
           data: { i1: input1, i2: input2 },
           success: function (response) {
             document.getElementById("result-text").innerHTML = response;
+            document.getElementById("dater4").value = "";
+            document.getElementById("nomComr4").value = "";
           },
         });
       }
@@ -163,6 +167,7 @@
           data: { i1: input1},
           success: function (response) {
             document.getElementById("con-patient-txt").innerHTML = response;
+            document.getElementById("NISSPatient").value = "";
           },
         });        
       }
@@ -175,11 +180,78 @@
           url: "/modif-inami",
           data: { i1: input1, i2: input2},
           success: function (response) {
+            document.getElementById("newinamiphar").value = "";
+            document.getElementById("newinamimed").value = "";
             document.getElementById("modif-inami-txt").innerHTML = response;
           },
         });        
       }
-      
+      function ajoutPharma() {
+        var i1 = document.getElementById("inami_pharma").value;
+        var i2 = document.getElementById("mailpharma").value;
+        var i3 = document.getElementById("nomPharma").value;
+        var i4 = document.getElementById("telephonePharma").value;
+        $.ajax({
+          type: "POST",
+          url: "/ajouter_pharmacien",
+          data: { inami_pharma: i1, mailpharma: i2,nomPharma:i3, telephonePharma:i4},
+          success: function (response) {
+            document.getElementById("inami_pharma").value = "";
+            document.getElementById("mailpharma").value = "";
+            document.getElementById("nomPharma").value = "";
+            document.getElementById("telephonePharma").value = "";
+            document.getElementById("ajout-txt").innerHTML = response;
+          },
+        });        
+      }
+      function ajoutMed() {
+        var i1 = document.getElementById("inami_med").value;
+        var i2 = document.getElementById("mailmed").value;
+        var i3 = document.getElementById("nomMed").value;
+        var i4 = document.getElementById("telephoneMed").value;
+        var i5 = document.getElementById("Specialite").value;
+        
+        $.ajax({
+          type: "POST",
+          url: "/ajouter_medecin",
+          data: { inami_med: i1, mailmed: i2,nomMed:i3, telephoneMed:i4, Specialite:i5},
+          success: function (response) {
+            document.getElementById("inami_med").value = "";
+            document.getElementById("mailmed").value = "";
+            document.getElementById("nomMed").value = "";
+            document.getElementById("telephoneMed").value = "";
+            document.getElementById("Specialite").value = "";
+            document.getElementById("ajout-txt").innerHTML = response;
+          },
+        });        
+      }
+      function ajoutPatient() {
+        var i1 = document.getElementById("NISS").value;
+        var i2 = document.getElementById("mail").value;
+        var i3 = document.getElementById("date_de_naissance").value;
+        var i4 = document.getElementById("nom").value;
+        var i5 = document.getElementById("prenom").value;
+        var i6 = document.getElementById("inami_medecin").value;
+        var i7 = document.getElementById("inami_pharmacien").value;
+        var i8 = document.getElementById("telephone").value;
+        
+        $.ajax({
+          type: "POST",
+          url: "/ajouter_patient",
+          data: { NISS: i1, mail: i2,date_de_naissance:i3, nom:i4, prenom:i5, inami_medecin:i6, inami_pharmacien:i7, telephone:i8},
+          success: function (response) {
+            document.getElementById("NISS").value = "";
+            document.getElementById("mail").value = "";
+            document.getElementById("date_de_naissance").value = "";
+            document.getElementById("nom").value = "";
+            document.getElementById("prenom").value = "";
+            document.getElementById("inami_medecin").value = "";
+            document.getElementById("inami_pharmacien").value = "";
+            document.getElementById("telephone").value = "";
+            document.getElementById("ajout-txt").innerHTML = response;
+          },
+        });        
+      }
     </script>
     <div class="tot-container">
       <header>
@@ -210,7 +282,7 @@
           <div class="flex-container">
             <div class="inscription-patient-container">
               <h2>Ajout d'un nouveau patient</h2>
-              <form method="POST" name="form_patient" action="/ajouter_patient">
+              <form method="POST" name="form_patient">
                 <div class="inputs-container">
                   <div class="input-container">
                     <label for="NISS">NISS:</label>
@@ -288,8 +360,8 @@
                     />
                   </div>
                 </div>
-                <button type="submit" id="envoyerPat" value="Envoyer">
-                  Envoyer
+                <button type="submit" id="envoyerPat" onclick="ajoutPatient()">
+                  Ajouter
                 </button>
               </form>
             </div>
@@ -298,7 +370,6 @@
               <form
                 method="POST"
                 name="form_pharmacien"
-                action="/ajouter_pharmacien"
               >
                 <div class="inputs-container">
                   <div class="input-container">
@@ -340,8 +411,8 @@
                     />
                   </div>
                 </div>
-                <button type="submit" id="envoyerPhar" value="Envoyer">
-                  Envoyer
+                <button type="button" id="envoyerPhar" onclick="ajoutPharma()">
+                  Ajouter
                 </button>
               </form>
             </div>
@@ -398,8 +469,8 @@
                     />
                   </div>
                 </div>
-                <button type="submit" id="envoyerMed" value="Envoyer">
-                  Envoyer
+                <button type="button" id="envoyerMed" onclick="ajoutMed()">
+                  Ajouter
                 </button>
               </form>
             </div>

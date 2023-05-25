@@ -191,10 +191,7 @@ def ajouter_patient():
     tel = request.form.get("telephone")
     print(niss, mail, Bdate, nom, prenom, inami_med, inami_pharma, tel)
     msg = insert_patient(niss, inami_med, inami_pharma, mail, Bdate, nom, prenom, tel)
-    return render_template(
-        "index.html",
-        message=msg,
-    )
+    return msg
 
 
 @app.route("/ajouter_medecin", methods=["POST"])
@@ -206,7 +203,7 @@ def ajouter_medecin():
     specialite = request.form.get("Specialite")
     print(inami, mail, nom, tel, specialite)
     msg = insert_medecin(inami, mail, nom, tel, specialite)
-    return render_template("index.html", message=msg)
+    return msg
 
 
 @app.route("/ajouter_pharmacien", methods=["POST"])
@@ -217,7 +214,7 @@ def ajouter_pharmacien():
     tel = request.form.get("telephonePharma")
     print(inami, mail, nom, tel)
     msg = insert_pharmacien(inami, mail, nom, tel)
-    return render_template("index.html", message=msg)
+    return msg
 
 
 if __name__ == "__main__":
