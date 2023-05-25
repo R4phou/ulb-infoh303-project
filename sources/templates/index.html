@@ -25,12 +25,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
-        $("#r1").click(function () {
-          $.get("/get-string1", function (data) {
-            $("#result-text").html(data);
-          });
-        });
-
         $("#r2").click(function () {
           $.get("/get-string2", function (data) {
             $("#result-text").html(data);
@@ -39,11 +33,6 @@
 
         $("#r3").click(function () {
           $.get("/get-string3", function (data) {
-            $("#result-text").html(data);
-          });
-        });
-        $("#r4").click(function () {
-          $.get("/get-string4", function (data) {
             $("#result-text").html(data);
           });
         });
@@ -69,11 +58,6 @@
         });
         $("#r9").click(function () {
           $.get("/get-string9", function (data) {
-            $("#result-text").html(data);
-          });
-        });
-        $("#r10").click(function () {
-          $.get("/get-string10", function (data) {
             $("#result-text").html(data);
           });
         });
@@ -132,6 +116,43 @@
           connexionForms.style.display = "none";
           btnshowForm.innerHTML = "Montrer menu Connexion";
         }
+      }
+      function envoyerDCI() {
+        var inputContent = document.getElementById("dci").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/dci_modif",
+          data: { contenu: inputContent },
+          success: function (response) {
+            document.getElementById("result-text").innerHTML = response;
+          },
+        });
+      }
+      function envoyerDate() {
+        var inputContent = document.getElementById("dater10").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/date_modif",
+          data: { contenu: inputContent },
+          success: function (response) {
+            document.getElementById("result-text").innerHTML = response;
+          },
+        });
+      }
+      function envoyerR4() {
+        var input1 = document.getElementById("dater4").value;
+        var input2 = document.getElementById("nomComr4").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/r4_modif",
+          data: { i1: input1, i2: input2 },
+          success: function (response) {
+            document.getElementById("result-text").innerHTML = response;
+          },
+        });
       }
     </script>
     <div class="tot-container">
@@ -429,7 +450,10 @@
         <div class="request-container">
           <div class="request">
             <p>Requête 1</p>
-            <button id="r1">GO</button>
+            <form action="/dci_modif" method="POST" name="dci_modif">
+              <input type="text" id="dci" placeholder="dci" name="dci" />
+              <button type="button" onclick="envoyerDCI()" id="r1">GO</button>
+            </form>
           </div>
           <div class="request">
             <p>Requête 2</p>
@@ -441,7 +465,15 @@
           </div>
           <div class="request">
             <p>Requête 4</p>
-            <button id="r4">GO</button>
+            <form action="/r4_modif" method="POST" name="r4_modif">
+              <input
+                type="date"
+                id="dater4"
+                placeholder="Date"
+                name="dater4"
+              />
+              <input type="text" id="nomComr4" name="nomComr4" placeholder="Nom Commercial">
+              <button type="button" onclick="envoyerR4()" id="r4">GO</button>
           </div>
           <div class="request">
             <p>Requête 5</p>
@@ -465,7 +497,15 @@
           </div>
           <div class="request">
             <p>Requête 10</p>
-            <button id="r10">GO</button>
+            <form action="/date_modif" method="POST" name="date_modif">
+              <input
+                type="date"
+                id="dater10"
+                placeholder="Date"
+                name="dater10"
+              />
+              <button type="button" onclick="envoyerDate()" id="r10">GO</button>
+            </form>
           </div>
         </div>
         <div class="output">

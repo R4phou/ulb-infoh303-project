@@ -30,6 +30,24 @@ def execute_requete(file):
     return result
 
 
+def execute_requete_with_param(requete):
+    db = get_connection(False)
+    print("Successfully connected to MySQL")
+    c = db.cursor()
+    try:
+        c.execute(requete)
+        print("Query executed successfully")
+        result = ""
+        i = 0
+        for elem in c:
+            i += 1
+            result += str(i) + " | " + str(elem) + "<br>"
+        result = str(i) + " éléments ont été sélectionnés <br>" + result
+    except:
+        result = "Erreur lors de l'exécution de la requête"
+    return result
+
+
 """Exécute une liste de requêtes SQL et renvoie leurs résultats"""
 
 
@@ -144,6 +162,7 @@ def values_to_str(value):
             result += ","
     return result
 
+
 """
 Transforme un dictionnaire de la forme
     {key1 : [a,b,c], key2 : [d,e,f]} 
@@ -152,36 +171,51 @@ Transforme un dictionnaire de la forme
       {'key1': 'b', 'key2': 'd'}, {'key1': 'b', 'key2': 'e'}, {'key1': 'b', 'key2': 'f'},
         {'key1': 'c', 'key2': 'd'}, {'key1': 'c', 'key2': 'e'}, {'key1': 'c', 'key2': 'f'}]
 """
+
+
 def flatMapping(dico):
-    #item: {key1 : [a,b,c], key2 : [d,e,f]}
+    # item: {key1 : [a,b,c], key2 : [d,e,f]}
     result = []
     matrixValues = []
-    #Crée une matrice avec les valeurs
+    # Crée une matrice avec les valeurs
     for key in dico.keys():
         matrixValues.append(dico[key])
-    
+
     depth = len(matrixValues)
     result = []
-    recursive_flatening(matrixValues,depth,0,list(dico.keys()),result)
+    recursive_flatening(matrixValues, depth, 0, list(dico.keys()), result)
     return result
-    #return ({key1 : a, key2 : d}, {key1 : b, key2 : e}, {key1 : c, key2 : f})
+    # return ({key1 : a, key2 : d}, {key1 : b, key2 : e}, {key1 : c, key2 : f})
+
 
 """fonction récursive utilisée lors de la création de la liste de dictionnaires"""
-def recursive_flatening(matrix,maxDepht,currentDepth,keyList,listDicos,memoDico = {}):
+
+
+def recursive_flatening(
+    matrix, maxDepht, currentDepth, keyList, listDicos, memoDico={}
+):
     if currentDepth >= maxDepht:
         listDicos.append(memoDico.copy())
         return
     else:
         for i in range(len(matrix[currentDepth])):
-            #print(matrix[currentDepth][i])
-            memoDico.update({keyList[currentDepth] : matrix[currentDepth][i]})
-            recursive_flatening(matrix,maxDepht,currentDepth+1,keyList,listDicos,memoDico)
+            # print(matrix[currentDepth][i])
+            memoDico.update({keyList[currentDepth]: matrix[currentDepth][i]})
+            recursive_flatening(
+                matrix, maxDepht, currentDepth + 1, keyList, listDicos, memoDico
+            )
+
 
 def recombinate():
     pass
 
+
 if __name__ == "__main__":
     print("This file is not meant to be executed")
-    #print(load_csv_file("Données/dossiers_patients.csv"))
-    dicotTest = {'key1' : ['a','b','c'], 'key2' : ['d','e','f','g'],'key3' : ['h','i','j']}
+    # print(load_csv_file("Données/dossiers_patients.csv"))
+    dicotTest = {
+        "key1": ["a", "b", "c"],
+        "key2": ["d", "e", "f", "g"],
+        "key3": ["h", "i", "j"],
+    }
     print(flatMapping(dicotTest))
