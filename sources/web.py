@@ -23,7 +23,7 @@ def creer():
 
 @app.route("/init", methods=["GET"])
 def init():
-    import init as i
+    import load as i
 
     return i.init_db()
 

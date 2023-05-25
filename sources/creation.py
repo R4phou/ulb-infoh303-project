@@ -4,8 +4,7 @@ from utiles import *
 
 # Les numéros inami sont mis en VARCHAR car les valeurs sont supérieures à 2^32
 medecin_query = """CREATE TABLE Medecin
-    (
-    INAMI BIGINT NOT NULL PRIMARY KEY,
+    (INAMI BIGINT NOT NULL PRIMARY KEY,
     Lname VARCHAR(50) NOT NULL,
     Email VARCHAR(50),
     Phone VARCHAR(50) NOT NULL,
