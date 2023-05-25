@@ -1,0 +1,321 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  font-family: var(--font-family);
+  color: var(--text);
+  font-size: 1.6rem;
+  background: var(--gray-light);
+  background: linear-gradient(to right bottom, #eee, #fff); }
+
+p {
+  margin: 1rem 0; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 2rem 0 2rem 0;
+  font-family: var(--font-title); }
+
+ul {
+  list-style: none; }
+
+a {
+  text-decoration: none;
+  color: white; }
+
+img {
+  max-width: 100%;
+  max-height: 100%; }
+
+form {
+  outline: 0; }
+
+.title-small {
+  letter-spacing: 0.5rem;
+  font-size: 1.7rem; }
+
+.text-primary {
+  color: var(--primary) !important; }
+
+.text-hint {
+  color: var(--hint); }
+
+.text-gray {
+  color: var(--gray); }
+
+.legende {
+  color: var(--gray);
+  font-size: 2rem;
+  font-family: var(--font-title); }
+
+button, .launch-container .btn-container button, .inscriptions-container .flex-container form button, .request-container .request button, header button {
+  background: var(--darklight);
+  margin: 1rem;
+  padding: 1rem;
+  width: 180px;
+  font-size: 2rem;
+  text-align: center;
+  place-self: center center;
+  align-items: center;
+  border: 1px solid var(--text);
+  border-radius: 10px;
+  color: var(--text); }
+  button:hover, .launch-container .btn-container button:hover, .inscriptions-container .flex-container form button:hover, .request-container .request button:hover {
+    border-color: var(--light);
+    background: var(--light);
+    transition: 0.5s; }
+
+.mx-1 {
+  margin-left: 1rem;
+  margin-right: 1rem; }
+
+.mb-1 {
+  margin-bottom: 1rem; }
+
+.mb-2 {
+  margin-bottom: 2rem !important; }
+
+.mb-5 {
+  margin-bottom: 5rem !important; }
+
+.pt-1 {
+  padding-top: 1rem; }
+
+.blank-space {
+  height: 500px; }
+
+.tot-container {
+  min-height: 100vh; }
+
+button {
+  background-color: white;
+  color: var(--primary); }
+
+input {
+  padding: 0.5rem; }
+
+.intro {
+  margin: 2rem;
+  text-align: center; }
+
+h2 {
+  text-decoration: underline;
+  text-align: center; }
+
+.launch-container {
+  text-align: center;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column; }
+  .launch-container .btn-container {
+    display: flex;
+    flex-direction: space-between;
+    justify-content: center;
+    margin: 2rem; }
+    .launch-container .btn-container button {
+      background-color: var(--primary);
+      color: white; }
+      .launch-container .btn-container button:hover {
+        background-color: var(--light);
+        color: var(--primary); }
+
+.inscriptions-container {
+  display: flex;
+  flex-direction: column;
+  background: var(--primary);
+  color: white; }
+  .inscriptions-container pre {
+    background: var(--darklight);
+    border: 0.1rem solid var(--text);
+    border-radius: 1.5rem;
+    box-shadow: 0 0 1rem var(--text);
+    text-align: left;
+    padding: 2rem;
+    margin: 0 5% 3rem 5%; }
+  .inscriptions-container p {
+    background: var(--darklight);
+    margin: 0 35% 3rem 35%;
+    border: 0.1rem solid var(--text);
+    border-radius: 1.5rem;
+    box-shadow: 0 0 1rem var(--text);
+    text-align: left;
+    padding: 2rem; }
+  .inscriptions-container .flex-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    background: var(--primary);
+    color: white; }
+    .inscriptions-container .flex-container h2 {
+      text-align: left;
+      margin: 0;
+      margin-left: 4rem; }
+    .inscriptions-container .flex-container form {
+      display: flex;
+      flex: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      overflow-x: auto;
+      margin: 0; }
+      .inscriptions-container .flex-container form .inputs-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 2rem; }
+        .inscriptions-container .flex-container form .inputs-container label {
+          margin: 1rem;
+          flex: 0 1 auto; }
+        .inscriptions-container .flex-container form .inputs-container input {
+          margin: 1rem;
+          height: 3rem;
+          border: 0.1rem solid var(--text);
+          border-radius: 0.5rem;
+          box-shadow: 0 0 1rem var(--text);
+          background: var(--light);
+          color: var(--text);
+          flex: 0 1 auto; }
+      .inscriptions-container .flex-container form button {
+        background-color: white;
+        color: var(--primary); }
+    .inscriptions-container .flex-container .inscription-patient-container {
+      padding: 1rem 4rem; }
+    .inscriptions-container .flex-container .inscription-pharmacien-container {
+      padding: 0 4rem; }
+    .inscriptions-container .flex-container .inscription-medecin-container {
+      padding: 0 4rem 2rem 4rem; }
+
+.connexion-patient {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .connexion-patient pre {
+    background: var(--light);
+    color: var(--text);
+    padding: 1rem;
+    border: 0.1rem solid var(--text);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem var(--text);
+    margin: 1rem; }
+  .connexion-patient button:hover {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary); }
+  .connexion-patient form {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .connexion-patient form input {
+      margin: 1rem;
+      height: 4rem;
+      border: 0.1rem solid var(--text);
+      border-radius: 0.5rem;
+      box-shadow: 0 0 1rem var(--text);
+      background: var(--light);
+      color: var(--text);
+      flex: 0 1 auto; }
+  .connexion-patient .modif-container {
+    background: white;
+    margin: 0;
+    padding-bottom: 2rem; }
+  .connexion-patient .patient-menu-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center; }
+    .connexion-patient .patient-menu-container p {
+      margin: 2rem;
+      text-align: justify; }
+    .connexion-patient .patient-menu-container .info-med-container {
+      display: flex;
+      background: var(--primary);
+      flex-direction: column;
+      align-items: center;
+      width: 100%; }
+      .connexion-patient .patient-menu-container .info-med-container h3 {
+        color: white; }
+      .connexion-patient .patient-menu-container .info-med-container .info-med-debut {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%; }
+      .connexion-patient .patient-menu-container .info-med-container button:hover {
+        background-color: var(--light);
+        color: var(--primary);
+        border-color: var(--primary); }
+      .connexion-patient .patient-menu-container .info-med-container .output-text {
+        width: 95%; }
+
+.request-container {
+  margin: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  border: 0.1rem solid var(--text);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem var(--text);
+  justify-content: center;
+  align-items: center; }
+  .request-container .request {
+    margin: 1rem;
+    flex: 0 1 auto; }
+    .request-container .request p {
+      text-align: center; }
+    .request-container .request button {
+      background-color: var(--primary);
+      color: white; }
+      .request-container .request button:hover {
+        background-color: white;
+        color: var(--primary);
+        border-color: var(--primary); }
+
+.output {
+  margin: 2rem;
+  text-align: justify; }
+  .output h2 {
+    text-decoration: underline;
+    text-align: center; }
+
+.output-text {
+  margin: 2rem;
+  padding: 2rem;
+  border: 0.1rem solid var(--text);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem var(--text);
+  background: var(--light);
+  color: var(--text); }
+
+header {
+  display: flex;
+  justify-content: center;
+  background: var(--primary);
+  color: white;
+  padding: 0rem; }
+  header h1 {
+    margin-right: 3rem; }
+  header button {
+    flex: end;
+    grid-area: "btn";
+    background: white;
+    color: var(--primary); }
+
+footer {
+  display: flex;
+  justify-content: center;
+  background: var(--primary);
+  color: white;
+  padding: 2rem; }

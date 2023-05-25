@@ -1,0 +1,15 @@
+:root {
+  --font-family: "Open Sans", sans-serif;
+  --font-title: "Open Sans", sans-serif;
+  --text: #333;
+  --gray-light: #ddd;
+  --hint: #999;
+  --primary: #031926;
+  --light: #D3F3EE;
+  --darklight: #7FB7BE;
+  --gray: #444;
+  --gradient: #3a0ca3 //linear-gradient(to right, var(--primary), var(--light));
+  --gradient-reverse:  #D3F3EE//linear-gradient(to left, var(-- primary), var(--light));
+  --primary: #004b93;
+  --darklight: #91bbd1;
+  --light: #dce9ef; }

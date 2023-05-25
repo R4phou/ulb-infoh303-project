@@ -4,6 +4,9 @@ from con_patient import *
 app = Flask(__name__)
 
 PATIENT = 2017845529
+DCI = "IBUPROFENE"
+DATE = "2019-01-01"
+NOMCOMMERCIAL = "ACINAX"
 
 
 @app.route("/")
@@ -25,12 +28,20 @@ def init():
     return i.init_db()
 
 
-@app.route("/get-string1", methods=["GET"])
+@app.route("/get-string1", methods=["POST"])
 def get_string1():
-    return (
+    import Requetes.r1 as r1
+
+    global DCI
+    DCI = request.form["DCI"]
+    result = (
         "Requête 1: 'La liste des noms commerciaux de médicaments correspondant à un nom en DCI, classés par ordre alphabétique et taille de conditionnement'<br>"
-        + execute_requete("./sources/Requetes/r1.sql")
+        + "DCI: "
+        + DCI
+        + "<br>"
+        + r1.execute_requete1(DCI)
     )
+    return render_template("index.html", result=result)
 
 
 @app.route("/get-string2", methods=["GET"])
