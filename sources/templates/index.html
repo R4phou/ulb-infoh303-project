@@ -158,18 +158,18 @@
           },
         });
       }
-        function envoyerconPatient() {
+      function envoyerconPatient() {
         var input1 = document.getElementById("NISSPatient").value;
 
         $.ajax({
           type: "POST",
           url: "/connexion-patient",
-          data: { i1: input1},
+          data: { i1: input1 },
           success: function (response) {
             document.getElementById("con-patient-txt").innerHTML = response;
             document.getElementById("NISSPatient").value = "";
           },
-        });        
+        });
       }
       function modifInamis() {
         var input1 = document.getElementById("newinamiphar").value;
@@ -178,13 +178,13 @@
         $.ajax({
           type: "POST",
           url: "/modif-inami",
-          data: { i1: input1, i2: input2},
+          data: { i1: input1, i2: input2 },
           success: function (response) {
             document.getElementById("newinamiphar").value = "";
             document.getElementById("newinamimed").value = "";
             document.getElementById("modif-inami-txt").innerHTML = response;
           },
-        });        
+        });
       }
       function ajoutPharma() {
         var i1 = document.getElementById("inami_pharma").value;
@@ -194,7 +194,12 @@
         $.ajax({
           type: "POST",
           url: "/ajouter_pharmacien",
-          data: { inami_pharma: i1, mailpharma: i2,nomPharma:i3, telephonePharma:i4},
+          data: {
+            inami_pharma: i1,
+            mailpharma: i2,
+            nomPharma: i3,
+            telephonePharma: i4,
+          },
           success: function (response) {
             document.getElementById("inami_pharma").value = "";
             document.getElementById("mailpharma").value = "";
@@ -202,7 +207,7 @@
             document.getElementById("telephonePharma").value = "";
             document.getElementById("ajout-txt").innerHTML = response;
           },
-        });        
+        });
       }
       function ajoutMed() {
         var i1 = document.getElementById("inami_med").value;
@@ -210,11 +215,17 @@
         var i3 = document.getElementById("nomMed").value;
         var i4 = document.getElementById("telephoneMed").value;
         var i5 = document.getElementById("Specialite").value;
-        
+
         $.ajax({
           type: "POST",
           url: "/ajouter_medecin",
-          data: { inami_med: i1, mailmed: i2,nomMed:i3, telephoneMed:i4, Specialite:i5},
+          data: {
+            inami_med: i1,
+            mailmed: i2,
+            nomMed: i3,
+            telephoneMed: i4,
+            Specialite: i5,
+          },
           success: function (response) {
             document.getElementById("inami_med").value = "";
             document.getElementById("mailmed").value = "";
@@ -223,7 +234,7 @@
             document.getElementById("Specialite").value = "";
             document.getElementById("ajout-txt").innerHTML = response;
           },
-        });        
+        });
       }
       function ajoutPatient() {
         var i1 = document.getElementById("NISS").value;
@@ -234,11 +245,20 @@
         var i6 = document.getElementById("inami_medecin").value;
         var i7 = document.getElementById("inami_pharmacien").value;
         var i8 = document.getElementById("telephone").value;
-        
+
         $.ajax({
           type: "POST",
           url: "/ajouter_patient",
-          data: { NISS: i1, mail: i2,date_de_naissance:i3, nom:i4, prenom:i5, inami_medecin:i6, inami_pharmacien:i7, telephone:i8},
+          data: {
+            NISS: i1,
+            mail: i2,
+            date_de_naissance: i3,
+            nom: i4,
+            prenom: i5,
+            inami_medecin: i6,
+            inami_pharmacien: i7,
+            telephone: i8,
+          },
           success: function (response) {
             document.getElementById("NISS").value = "";
             document.getElementById("mail").value = "";
@@ -250,7 +270,7 @@
             document.getElementById("telephone").value = "";
             document.getElementById("ajout-txt").innerHTML = response;
           },
-        });        
+        });
       }
     </script>
     <div class="tot-container">
@@ -367,10 +387,7 @@
             </div>
             <div class="inscription-pharmacien-container">
               <h2>Ajout d'un nouveau pharmacien</h2>
-              <form
-                method="POST"
-                name="form_pharmacien"
-              >
+              <form method="POST" name="form_pharmacien">
                 <div class="inputs-container">
                   <div class="input-container">
                     <label for="inami_pharma">INAMI pharmacien:</label>
@@ -476,22 +493,15 @@
             </div>
           </div>
           <div class="ajout-result">
-            {% if message %}
-            <pre id="ajout-txt">{{ message }}</pre>
-            {% else %}
             <p id="ajout-txt">
               Remplisser le fomulaire pour ajouter un Patient, Pharmacien ou
               Médecin dans la base de données!
             </p>
-            {% endif %}
           </div>
         </div>
         <div class="connexion-patient" id="connexion-patient">
           <h2>Connexion d'un patient</h2>
-          <form
-            method="POST"
-            name="form-connexion-patient"
-          >
+          <form method="POST" name="form-connexion-patient">
             <input
               type="text"
               name="NISSPatient"
@@ -519,10 +529,12 @@
                   id="newinamimed"
                   name="newinamimed"
                 />
-                <button type="button" onclick="modifInamis()" id="modif-inami">Modifier</button>
+                <button type="button" onclick="modifInamis()" id="modif-inami">
+                  Modifier
+                </button>
               </div>
             </form>
-            <p id="modif-inami-txt">Résultat</p>
+            <p id="modif-inami-txt"></p>
           </div>
           <div class="patient-menu-container">
             <div class="info-med-container">
@@ -558,14 +570,15 @@
           <div class="request">
             <p>Requête 4</p>
             <form action="/r4_modif" method="POST" name="r4_modif">
+              <input type="date" id="dater4" placeholder="Date" name="dater4" />
               <input
-                type="date"
-                id="dater4"
-                placeholder="Date"
-                name="dater4"
+                type="text"
+                id="nomComr4"
+                name="nomComr4"
+                placeholder="Nom Commercial"
               />
-              <input type="text" id="nomComr4" name="nomComr4" placeholder="Nom Commercial">
               <button type="button" onclick="envoyerR4()" id="r4">GO</button>
+            </form>
           </div>
           <div class="request">
             <p>Requête 5</p>
@@ -596,7 +609,14 @@
                 placeholder="Date"
                 name="dater10"
               />
-              <button type="button" onclick="envoyerDate()" id="r10">GO</button>
+              <button
+                type="button"
+                class="prendtaclasse"
+                onclick="envoyerDate()"
+                id="r10"
+              >
+                GO
+              </button>
             </form>
           </div>
         </div>

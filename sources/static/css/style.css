@@ -140,7 +140,7 @@ h2 {
     box-shadow: 0 0 1rem var(--text);
     text-align: left;
     padding: 2rem;
-    margin: 0 35% 3rem 35%; }
+    margin: 0 5% 3rem 5%; }
   .inscriptions-container p {
     background: var(--darklight);
     margin: 0 35% 3rem 35%;
@@ -272,7 +272,10 @@ h2 {
   align-items: center; }
   .request-container .request {
     margin: 1rem;
-    flex: 0 1 auto; }
+    flex: 0 1 auto;
+    border: 0.1rem solid var(--primary);
+    border-radius: 0.5rem;
+    padding: 0.5rem; }
     .request-container .request p {
       text-align: center; }
     .request-container .request button {
@@ -282,6 +285,26 @@ h2 {
         background-color: white;
         color: var(--primary);
         border-color: var(--primary); }
+    .request-container .request form input {
+      margin: 1rem;
+      height: 3rem;
+      border: 0.1rem solid var(--text);
+      border-radius: 0.5rem;
+      box-shadow: 0 0 1rem var(--text);
+      background: var(--light);
+      color: var(--text);
+      flex: 0 1 auto; }
+    .request-container .request form button {
+      padding: 1rem;
+      width: auto;
+      font-size: 1.8rem;
+      text-align: center; }
+
+.prendtaclasse {
+  padding: 1rem;
+  width: auto;
+  font-size: 1.8rem;
+  text-align: center; }
 
 .output {
   margin: 2rem;
