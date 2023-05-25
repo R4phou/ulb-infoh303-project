@@ -152,8 +152,14 @@ def requete10():
 
 @app.route("/get-infomedpatient", methods=["GET"])
 def get_infomedpatient():
-    # TO DO : Récupérer les informations médicales du patient
-    return "Informations du patients: " + str(PATIENT)
+    import Requetes.donnees_patient as rq_dp
+    result = (
+        "Informations du patients:"
+        +" Nom Médecin, Nom Pharmacien, INAMI Médecin, INAMI Pharmacien, Médicament, DCI, Date de prescription, Date de vente, Durée du traitement. <br><br>"
+        + rq_dp.get_donnees_patient(PATIENT)
+    )
+
+    return result
 
 
 @app.route("/connexion-patient", methods=["POST"])
