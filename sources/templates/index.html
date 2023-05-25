@@ -154,6 +154,32 @@
           },
         });
       }
+        function envoyerconPatient() {
+        var input1 = document.getElementById("NISSPatient").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/connexion-patient",
+          data: { i1: input1},
+          success: function (response) {
+            document.getElementById("con-patient-txt").innerHTML = response;
+          },
+        });        
+      }
+      function modifInamis() {
+        var input1 = document.getElementById("newinamiphar").value;
+        var input2 = document.getElementById("newinamimed").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/modif-inami",
+          data: { i1: input1, i2: input2},
+          success: function (response) {
+            document.getElementById("modif-inami-txt").innerHTML = response;
+          },
+        });        
+      }
+      
     </script>
     <div class="tot-container">
       <header>
@@ -394,7 +420,6 @@
           <form
             method="POST"
             name="form-connexion-patient"
-            action="/connexion-patient"
           >
             <input
               type="text"
@@ -402,16 +427,14 @@
               id="NISSPatient"
               placeholder="Votre NISS"
             />
-            <button type="submit" id="connexion" value="Envoyer">
+            <button type="button" id="connexion" onclick="envoyerconPatient()">
               Se connecter
             </button>
           </form>
-          {% if msg2 %}
-          <pre id="ajout-txt">{{ msg2 }}</pre>
-          {% endif %}
+          <p id="con-patient-txt">Vos données patients s'afficheront ici.</p>
           <div class="modif-container">
             <h2>Modifier vos médecin et pharmacien de référence</h2>
-            <form action="/modif-inami" method="POST" name="form-modif-inami">
+            <form method="POST" name="form-modif-inami">
               <div class="input-container">
                 <input
                   type="text"
@@ -425,12 +448,10 @@
                   id="newinamimed"
                   name="newinamimed"
                 />
-                <button type="submit" id="modif-inami">Modifier</button>
+                <button type="button" onclick="modifInamis()" id="modif-inami">Modifier</button>
               </div>
             </form>
-            {% if msg %}
-            <pre id="ajout-txt">{{ msg }}</pre>
-            {% endif %}
+            <p id="modif-inami-txt">Résultat</p>
           </div>
           <div class="patient-menu-container">
             <div class="info-med-container">

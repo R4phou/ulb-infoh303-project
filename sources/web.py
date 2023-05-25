@@ -158,7 +158,7 @@ def get_infomedpatient():
 
 @app.route("/connexion-patient", methods=["POST"])
 def connexion_patient():
-    niss = request.form.get("NISSPatient")
+    niss = request.form.get("i1")
     print("Niss récupéré:", niss)
     if niss is not None:
         global PATIENT
@@ -167,16 +167,16 @@ def connexion_patient():
         print(msg2)
     else:
         msg2 = "Patient non trouvé !"
-    return render_template("index.html", msg2=msg2)
+    return msg2
 
 
 @app.route("/modif-inami", methods=["POST"])
 def modif_inami():
-    inami_phar = request.form.get("newinamiphar")
-    inami_med = request.form.get("newinamimed")
-    print(inami_phar, inami_med)
+    inami_phar = request.form.get("i1")
+    inami_med = request.form.get("i2")
+    print("INAMI reçus:", inami_phar, "et ", inami_med)
     msg = modif_inami_patient(PATIENT, inami_med, inami_phar)
-    return render_template("index.html", msg=msg)
+    return msg
 
 
 @app.route("/ajouter_patient", methods=["POST"])

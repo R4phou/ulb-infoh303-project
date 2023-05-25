@@ -3,7 +3,10 @@ from utiles import *
 
 db = get_connection(False)
 cursor = db.cursor()
-db.autocommit=True #permet faire des commits auto lorsqu'une modif est apportée à la database 
+db.autocommit = (
+    True  # permet faire des commits auto lorsqu'une modif est apportée à la database
+)
+
 
 def check_patient(niss):
     print(niss)
@@ -20,9 +23,9 @@ def select_patient_info(niss):
     try:
         query = "SELECT INAMImed, INAMIPhar FROM patient WHERE NISS = " + str(niss)
         cursor.execute(query)
-        result = "Bienvenue Patient " + str(niss) + "\n"
+        result = "Bienvenue Patient " + str(niss) + "<br>"
         for element in cursor:
-            result += "Médecin de référence: " + str(element[0]) + "\n"
+            result += "Médecin de référence: " + str(element[0]) + "<br>"
             result += "Pharmacien de référence: " + str(element[1])
     except:
         result = "Données du patient " + str(niss) + " non trouvées"
@@ -109,7 +112,7 @@ def insert_pharmacien(inami, mail, nom, tel):
 
 
 def modif_inami_patient(patient, inami_med, inami_phar):
-    result = "Bienvenue Patient " + str(patient) + "\n"
+    result = "Bienvenue Patient " + str(patient) + "<br>"
     if inami_med != None:
         try:
             query = (
@@ -122,12 +125,12 @@ def modif_inami_patient(patient, inami_med, inami_phar):
             print(query)
             cursor.execute(query)
             result += (
-                "Médecin de référence modifié avec succès \nVotre nouveau médecin de référence est: "
+                "Médecin de référence modifié avec succès <br>Votre nouveau médecin de référence est: "
                 + str(inami_med)
-                + "\n"
+                + "<br>"
             )
         except:
-            result += "Le médecin n'a pas pu être modifié dans la base de données. \n"
+            result += "Le médecin n'a pas pu être modifié dans la base de données. <br>"
     if inami_phar != None:
         try:
             query = (
@@ -140,12 +143,12 @@ def modif_inami_patient(patient, inami_med, inami_phar):
             print(query)
             cursor.execute(query)
             result += (
-                "Pharmacien de référence modifié avec succès \nVotre nouveau pharmacien de référence est: "
+                "Pharmacien de référence modifié avec succès <br>Votre nouveau pharmacien de référence est: "
                 + str(inami_phar)
-                + "\n"
+                + "<br>"
             )
         except:
-            result += "Le pharmacien n'a pas pu être modifié à la base de données.\n"
+            result += "Le pharmacien n'a pas pu être modifié à la base de données.<br>"
     return result
 
 
