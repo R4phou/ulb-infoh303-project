@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Open+Sans:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/4dfcd43aac.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="../static/css/variable.css" />
+    <title>INFO-H303 | Queries</title>
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#r2").click(function () {
+          $.get("/get-string2", function (data) {
+            $("#result-text").html(data);
+          });
+        });
+
+        $("#r3").click(function () {
+          $.get("/get-string3", function (data) {
+            $("#result-text").html(data);
+          });
+        });
+        $("#r5").click(function () {
+          $.get("/get-string5", function (data) {
+            $("#result-text").html(data);
+          });
+        });
+        $("#r6").click(function () {
+          $.get("/get-string6", function (data) {
+            $("#result-text").html(data);
+          });
+        });
+        $("#r7").click(function () {
+          $.get("/get-string7", function (data) {
+            $("#result-text").html(data);
+          });
+        });
+        $("#r8").click(function () {
+          $.get("/get-string8", function (data) {
+            $("#result-text").html(data);
+          });
+        });
+        $("#r9").click(function () {
+          $.get("/get-string9", function (data) {
+            $("#result-text").html(data);
+          });
+        });
+        $("#btninfomedicalespatient").click(function () {
+          $.get("/get-infomedpatient", function (data) {
+            $("#infomedicalespatient").html(data);
+          });
+        });
+        $("#creer").click(function () {
+          $.get("/creer", function (data) {
+            $("#init-txt").html(data);
+          });
+        });
+        $("#init").click(function () {
+          $.get("/init", function (data) {
+            $("#init-txt").html(data);
+          });
+        });
+        $("#envoyerPat").click(function () {
+          $("#ajout-txt").html(
+            "Requête envoyée pour ajouter un Patient dans la base de données!"
+          );
+        });
+        $("#envoyerPhar").click(function () {
+          $("#ajout-txt").html(
+            "Requête envoyée pour ajouter un Pharmacien dans la base de données!"
+          );
+        });
+        $("#envoyerMed").click(function () {
+          $("#ajout-txt").html(
+            "Requête envoyée pour ajouter un Médecin dans la base de données!"
+          );
+        });
+      });
+    </script>
+    <script>
+      function toggleForm() {
+        var ajoutForms = document.getElementById("inscriptions-container");
+        var btnshowForm = document.getElementById("btnshowForm");
+        if (ajoutForms.style.display === "none") {
+          ajoutForms.style.display = "flex";
+          btnshowForm.innerHTML = "Cacher menu Ajout";
+        } else {
+          ajoutForms.style.display = "none";
+          btnshowForm.innerHTML = "Montrer menu Ajout";
+        }
+      }
+
+      function toggleConnexion() {
+        var connexionForms = document.getElementById("connexion-patient");
+        var btnshowForm = document.getElementById("btnshowConn");
+        if (connexionForms.style.display === "none") {
+          connexionForms.style.display = "flex";
+          btnshowForm.innerHTML = "Cacher menu Connexion";
+        } else {
+          connexionForms.style.display = "none";
+          btnshowForm.innerHTML = "Montrer menu Connexion";
+        }
+      }
+      function envoyerDCI() {
+        var inputContent = document.getElementById("dci").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/dci_modif",
+          data: { contenu: inputContent },
+          success: function (response) {
+            document.getElementById("result-text").innerHTML = response;
+            document.getElementById("dci").value = "";
+          },
+        });
+      }
+      function envoyerDate() {
+        var inputContent = document.getElementById("dater10").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/date_modif",
+          data: { contenu: inputContent },
+          success: function (response) {
+            document.getElementById("result-text").innerHTML = response;
+            document.getElementById("dater10").value = "";
+          },
+        });
+      }
+      function envoyerR4() {
+        var input1 = document.getElementById("dater4").value;
+        var input2 = document.getElementById("nomComr4").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/r4_modif",
+          data: { i1: input1, i2: input2 },
+          success: function (response) {
+            document.getElementById("result-text").innerHTML = response;
+            document.getElementById("dater4").value = "";
+            document.getElementById("nomComr4").value = "";
+          },
+        });
+      }
+      function envoyerconPatient() {
+        var input1 = document.getElementById("NISSPatient").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/connexion-patient",
+          data: { i1: input1 },
+          success: function (response) {
+            document.getElementById("con-patient-txt").innerHTML = response;
+            document.getElementById("NISSPatient").value = "";
+          },
+        });
+      }
+      function modifInamis() {
+        var input1 = document.getElementById("newinamiphar").value;
+        var input2 = document.getElementById("newinamimed").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/modif-inami",
+          data: { i1: input1, i2: input2 },
+          success: function (response) {
+            document.getElementById("newinamiphar").value = "";
+            document.getElementById("newinamimed").value = "";
+            document.getElementById("modif-inami-txt").innerHTML = response;
+          },
+        });
+      }
+      function ajoutPharma() {
+        var i1 = document.getElementById("inami_pharma").value;
+        var i2 = document.getElementById("mailpharma").value;
+        var i3 = document.getElementById("nomPharma").value;
+        var i4 = document.getElementById("telephonePharma").value;
+        $.ajax({
+          type: "POST",
+          url: "/ajouter_pharmacien",
+          data: {
+            inami_pharma: i1,
+            mailpharma: i2,
+            nomPharma: i3,
+            telephonePharma: i4,
+          },
+          success: function (response) {
+            document.getElementById("inami_pharma").value = "";
+            document.getElementById("mailpharma").value = "";
+            document.getElementById("nomPharma").value = "";
+            document.getElementById("telephonePharma").value = "";
+            document.getElementById("ajout-txt").innerHTML = response;
+          },
+        });
+      }
+      function ajoutMed() {
+        var i1 = document.getElementById("inami_med").value;
+        var i2 = document.getElementById("mailmed").value;
+        var i3 = document.getElementById("nomMed").value;
+        var i4 = document.getElementById("telephoneMed").value;
+        var i5 = document.getElementById("Specialite").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/ajouter_medecin",
+          data: {
+            inami_med: i1,
+            mailmed: i2,
+            nomMed: i3,
+            telephoneMed: i4,
+            Specialite: i5,
+          },
+          success: function (response) {
+            document.getElementById("inami_med").value = "";
+            document.getElementById("mailmed").value = "";
+            document.getElementById("nomMed").value = "";
+            document.getElementById("telephoneMed").value = "";
+            document.getElementById("Specialite").value = "";
+            document.getElementById("ajout-txt").innerHTML = response;
+          },
+        });
+      }
+      function ajoutPatient() {
+        var i1 = document.getElementById("NISS").value;
+        var i2 = document.getElementById("mail").value;
+        var i3 = document.getElementById("date_de_naissance").value;
+        var i4 = document.getElementById("nom").value;
+        var i5 = document.getElementById("prenom").value;
+        var i6 = document.getElementById("inami_medecin").value;
+        var i7 = document.getElementById("inami_pharmacien").value;
+        var i8 = document.getElementById("telephone").value;
+
+        $.ajax({
+          type: "POST",
+          url: "/ajouter_patient",
+          data: {
+            NISS: i1,
+            mail: i2,
+            date_de_naissance: i3,
+            nom: i4,
+            prenom: i5,
+            inami_medecin: i6,
+            inami_pharmacien: i7,
+            telephone: i8,
+          },
+          success: function (response) {
+            document.getElementById("NISS").value = "";
+            document.getElementById("mail").value = "";
+            document.getElementById("date_de_naissance").value = "";
+            document.getElementById("nom").value = "";
+            document.getElementById("prenom").value = "";
+            document.getElementById("inami_medecin").value = "";
+            document.getElementById("inami_pharmacien").value = "";
+            document.getElementById("telephone").value = "";
+            document.getElementById("ajout-txt").innerHTML = response;
+          },
+        });
+      }
+    </script>
+    <div class="tot-container">
+      <header>
+        <h1>INFO-H303 - Groupe AF</h1>
+        <button id="btnshowForm" onclick="toggleForm()">
+          Montrer menu Ajout
+        </button>
+        <button id="btnshowConn" onclick="toggleConnexion()">
+          Montrer menu Connexion
+        </button>
+      </header>
+      <div class="container">
+        <div class="intro">
+          <p>Bienvenue dans l'interface de notre base de données !</p>
+        </div>
+        <div class="launch-container">
+          <h2>Lancement de la base de données</h2>
+          <p>
+            Appuyez sur le bouton CRÉER pour créer les tables et sur le bouton
+            CHARGER pour charger les données dans la base de données.
+          </p>
+          <div class="btn-container">
+            <button id="creer">CRÉER</button><button id="init">CHARGER</button>
+          </div>
+          <p id="init-txt"></p>
+        </div>
+        <div class="inscriptions-container" id="inscriptions-container">
+          <div class="flex-container">
+            <div class="inscription-patient-container">
+              <h2>Ajout d'un nouveau patient</h2>
+              <form method="POST" name="form_patient">
+                <div class="inputs-container">
+                  <div class="input-container">
+                    <label for="NISS">NISS:</label>
+                    <input
+                      type="text"
+                      name="NISS"
+                      id="NISS"
+                      placeholder="NISS"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="date_de_naissance">Date de naissance:</label>
+                    <input
+                      type="date"
+                      name="date_de_naissance"
+                      id="date_de_naissance"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="inami_medecin">INAMI médecin:</label>
+                    <input
+                      type="text"
+                      name="inami_medecin"
+                      id="inami_medecin"
+                      placeholder="INAMI Médecin"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="inami_pharmacien">INAMI pharmacien:</label>
+                    <input
+                      type="text"
+                      name="inami_pharmacien"
+                      id="inami_pharmacien"
+                      placeholder="INAMI Pharmacien"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="mail">Mail:</label>
+                    <input
+                      type="email"
+                      name="mail"
+                      id="mail"
+                      placeholder="Adresse Mail"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="nom">Nom:</label>
+                    <input
+                      type="text"
+                      name="nom"
+                      id="nom"
+                      placeholder="Nom"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="prenom">Prénom:</label>
+                    <input
+                      type="text"
+                      name="prenom"
+                      id="prenom"
+                      placeholder="Prénom"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="telephone">Téléphone:</label>
+                    <input
+                      type="tel"
+                      name="telephone"
+                      id="telephone"
+                      placeholder="Numéro de téléphone"
+                    />
+                  </div>
+                </div>
+                <button type="button" id="envoyerPat" onclick="ajoutPatient()">
+                  Ajouter
+                </button>
+              </form>
+            </div>
+            <div class="inscription-pharmacien-container">
+              <h2>Ajout d'un nouveau pharmacien</h2>
+              <form method="POST" name="form_pharmacien">
+                <div class="inputs-container">
+                  <div class="input-container">
+                    <label for="inami_pharma">INAMI pharmacien:</label>
+                    <input
+                      type="text"
+                      name="inami_pharma"
+                      id="inami_pharma"
+                      placeholder="INAMI"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="mailpharma">Mail:</label>
+                    <input
+                      type="email"
+                      name="mailpharma"
+                      id="mailpharma"
+                      placeholder="Adresse mail"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="nomPharma">Nom:</label>
+                    <input
+                      type="text"
+                      name="nomPharma"
+                      id="nomPharma"
+                      placeholder="Nom"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="telephonePharma">Téléphone:</label>
+                    <input
+                      type="tel"
+                      name="telephonePharma"
+                      id="telephonePharma"
+                      placeholder="Numéro de téléphone"
+                      required
+                    />
+                  </div>
+                </div>
+                <button type="button" id="envoyerPhar" onclick="ajoutPharma()">
+                  Ajouter
+                </button>
+              </form>
+            </div>
+            <div class="inscription-medecin-container">
+              <h2>Ajout d'un nouveau médecin</h2>
+              <form method="POST" name="form_medecin" action="/ajouter_medecin">
+                <div class="inputs-container">
+                  <div class="input-container">
+                    <label for="inami_med">INAMI médecin:</label>
+                    <input
+                      type="text"
+                      name="inami_med"
+                      id="inami_med"
+                      placeholder="INAMI"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="mailmed">Mail:</label>
+                    <input
+                      type="email"
+                      name="mailmed"
+                      id="mailmed"
+                      placeholder="Adresse mail"
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="nomMed">Nom:</label>
+                    <input
+                      type="text"
+                      name="nomMed"
+                      id="nomMed"
+                      placeholder="Nom"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="telephoneMed">Téléphone:</label>
+                    <input
+                      type="tel"
+                      name="telephoneMed"
+                      id="telephoneMed"
+                      placeholder="Numéro de téléphone"
+                      required
+                    />
+                  </div>
+                  <div class="input-container">
+                    <label for="Specialite">Spécialité:</label>
+                    <input
+                      type="text"
+                      name="Specialite"
+                      id="Specialite"
+                      placeholder="Spécialité"
+                      required
+                    />
+                  </div>
+                </div>
+                <button type="button" id="envoyerMed" onclick="ajoutMed()">
+                  Ajouter
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="ajout-result">
+            <p id="ajout-txt">
+              Remplisser le fomulaire pour ajouter un Patient, Pharmacien ou
+              Médecin dans la base de données!
+            </p>
+          </div>
+        </div>
+        <div class="connexion-patient" id="connexion-patient">
+          <h2>Connexion d'un patient</h2>
+          <form method="POST" name="form-connexion-patient">
+            <input
+              type="text"
+              name="NISSPatient"
+              id="NISSPatient"
+              placeholder="Votre NISS"
+            />
+            <button type="button" id="connexion" onclick="envoyerconPatient()">
+              Se connecter
+            </button>
+          </form>
+          <p id="con-patient-txt">Vos données patients s'afficheront ici.</p>
+          <div class="modif-container">
+            <h2>Modifier vos médecin et pharmacien de référence</h2>
+            <form method="POST" name="form-modif-inami">
+              <div class="input-container">
+                <input
+                  type="text"
+                  placeholder="Nouvel INAMI pharmacien"
+                  id="newinamiphar"
+                  name="newinamiphar"
+                />
+                <input
+                  type="text"
+                  placeholder="Nouvel INAMI médecin"
+                  id="newinamimed"
+                  name="newinamimed"
+                />
+                <button type="button" onclick="modifInamis()" id="modif-inami">
+                  Modifier
+                </button>
+              </div>
+            </form>
+            <p id="modif-inami-txt"></p>
+          </div>
+          <div class="patient-menu-container">
+            <div class="info-med-container">
+              <div class="info-med-debut">
+                <h3>Vos informations médicales</h3>
+                <button id="btninfomedicalespatient">GET</button>
+              </div>
+              <div class="output-text">
+                <p id="infomedicalespatient">
+                  Ici s'affichent les informations médicales
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2>Différentes requêtes:</h2>
+        <div class="request-container">
+          <div class="request">
+            <p>Requête 1</p>
+            <form action="/dci_modif" method="POST" name="dci_modif">
+              <input type="text" id="dci" placeholder="dci" name="dci" />
+              <button type="button" onclick="envoyerDCI()" id="r1">GO</button>
+            </form>
+          </div>
+          <div class="request">
+            <p>Requête 2</p>
+            <button id="r2">GO</button>
+          </div>
+          <div class="request">
+            <p>Requête 3</p>
+            <button id="r3">GO</button>
+          </div>
+          <div class="request">
+            <p>Requête 4</p>
+            <form action="/r4_modif" method="POST" name="r4_modif">
+              <input type="date" id="dater4" placeholder="Date" name="dater4" />
+              <input
+                type="text"
+                id="nomComr4"
+                name="nomComr4"
+                placeholder="Nom Commercial"
+              />
+              <button type="button" onclick="envoyerR4()" id="r4">GO</button>
+            </form>
+          </div>
+          <div class="request">
+            <p>Requête 5</p>
+            <button id="r5">GO</button>
+          </div>
+          <div class="request">
+            <p>Requête 6</p>
+            <button id="r6">GO</button>
+          </div>
+          <div class="request">
+            <p>Requête 7</p>
+            <button id="r7">GO</button>
+          </div>
+          <div class="request">
+            <p>Requête 8</p>
+            <button id="r8">GO</button>
+          </div>
+          <div class="request">
+            <p>Requête 9</p>
+            <button id="r9">GO</button>
+          </div>
+          <div class="request">
+            <p>Requête 10</p>
+            <form action="/date_modif" method="POST" name="date_modif">
+              <input
+                type="date"
+                id="dater10"
+                placeholder="Date"
+                name="dater10"
+              />
+              <button
+                type="button"
+                class="prendtaclasse"
+                onclick="envoyerDate()"
+                id="r10"
+              >
+                GO
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="output">
+          <h2>Résultats de la requête:</h2>
+          <div class="output-text">
+            <p class="result-text" id="result-text">
+              Ici s'affichera le résultat de la requête.
+            </p>
+          </div>
+        </div>
+      </div>
+      <footer>
+        Projet du groupe AF- Alexandre Achten, Nicolas Guilbaud et Raphaël
+        Humblet 2022-2023
+      </footer>
+    </div>
+  </body>
+</html>
