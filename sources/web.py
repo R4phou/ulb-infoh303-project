@@ -196,6 +196,7 @@ def ajouter_patient():
     tel = request.form.get("telephone")
     print(niss, mail, Bdate, nom, prenom, inami_med, inami_pharma, tel)
     msg = insert_patient(niss, inami_med, inami_pharma, mail, Bdate, nom, prenom, tel)
+    print("Message: ", msg)
     return msg
 
 
