@@ -1,10 +1,10 @@
-SELECT path.NomPath
-FROM pathologie path
-JOIN diagnostic diag ON path.NomPath = diag.NomPathologie
-GROUP BY path.NomPath
+SELECT PATH.NOMPATH, COUNT(*)
+FROM PATHOLOGIE PATH, DIAGNOSTIC DIAG
+WHERE PATH.NOMPATH = DIAG.NOMPATHOLOGIE
+GROUP BY PATH.NOMPATH
 HAVING COUNT(*) >= ALL (
-    SELECT COUNT(*)
-    FROM diagnostic diag2
-    WHERE diag2.NomPathologie <> path.NomPath
-    GROUP BY diag2.NomPathologie
-)
+        SELECT COUNT(*)
+        FROM DIAGNOSTIC DIAG2
+        WHERE DIAG2.NOMPATHOLOGIE <> PATH.NOMPATH
+        GROUP BY DIAG2.NOMPATHOLOGIE
+    )
