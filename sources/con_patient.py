@@ -152,5 +152,15 @@ def modif_inami_patient(patient, inami_med, inami_phar):
     return result
 
 
+def get_donnees_patient(niss):
+    query = (
+        "SELECT `NomMed`,`NomPhar`,`InamiMed`,`InamiPhar`,`NomComMedicament`,`DCI`,`datePrescription`,`dateVente`,`dureeTraitement` "
+        + "FROM dossierpatient "
+        + "WHERE `NISSPatient` ="
+        + str(niss)
+    )
+    return execute_requete_with_param(query)
+
+
 if __name__ == "__main__":
     print(select_patient_info(2017845529))
