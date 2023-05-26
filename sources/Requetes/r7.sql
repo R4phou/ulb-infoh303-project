@@ -1,12 +1,16 @@
-SELECT t2.nom, t2.decennie, t2.c
+SELECT T2.NOM, T2.DECENNIE, T2.C
 FROM(
-        SELECT t1.nom, t1.decennie, t1.c, MAX(t1.c) OVER (PARTITION BY (t1.decennie)) AS m2
-        FROM (
-                SELECT m.`NomCom` AS nom, floor(YEAR(p.`Bdate`)/10)*10 AS decennie, COUNT(m.`DCI`) c
-                FROM patient p JOIN dossierpatient dossier ON dossier.`NISSPatient` = p.`NISS`
-                JOIN medicament m ON m.`DCI` = dossier.`DCI`
-                GROUP BY nom,decennie HAVING (decennie >= 1950 AND decennie < 2020)
-        ) AS t1
-) AS t2
-WHERE t2.c = t2.m2
-ORDER BY decennie ASC;
+                SELECT T1.NOM, T1.DECENNIE, T1.C, MAX(T1.C) OVER (
+                        PARTITION BY (T1.DECENNIE)) AS M2
+                FROM (
+                                SELECT M.NOMCOM AS NOM, FLOOR(YEAR(P.BDATE)/10)*10 AS DECENNIE, COUNT(M.DCI) C
+                                FROM PATIENT P, DOSSIERPATIENT DP, MEDICAMENT M
+                                WHERE DP.NISSPATIENT = P.NISS AND
+                                        M.DCI = DP.DCI
+                                GROUP BY NOM, DECENNIE
+                                HAVING (DECENNIE >= 1950 AND
+                                        DECENNIE < 2020)
+                        ) AS T1
+        ) AS T2
+WHERE T2.C = T2.M2
+ORDER BY DECENNIE ASC;
