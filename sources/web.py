@@ -102,7 +102,7 @@ def get_string5():
 def get_string6():
     return (
         "Requête 6: 'La liste des médecins ayant prescrit des médicaments ne relevant pas de leur spécialité'<br>"
-        + execute_requete("./sources/Requetes/r6b.sql")
+        + execute_requete("./sources/Requetes/r6.sql")
     )
 
 
@@ -153,9 +153,10 @@ def requete10():
 @app.route("/get-infomedpatient", methods=["GET"])
 def get_infomedpatient():
     import Requetes.donnees_patient as rq_dp
+
     result = (
         "Informations du patients:"
-        +" Nom Médecin, Nom Pharmacien, INAMI Médecin, INAMI Pharmacien, Médicament, DCI, Date de prescription, Date de vente, Durée du traitement. <br><br>"
+        + " Nom Médecin, Nom Pharmacien, INAMI Médecin, INAMI Pharmacien, Médicament, DCI, Date de prescription, Date de vente, Durée du traitement. <br><br>"
         + rq_dp.get_donnees_patient(PATIENT)
     )
 
