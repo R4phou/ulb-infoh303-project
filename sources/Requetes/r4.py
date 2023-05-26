@@ -3,10 +3,10 @@ def execute_requete4(date, nomComMedicament):
 
     requete = (
         "SELECT distinct p.NISS, p.Lname, p.Fname"
-        + " FROM DossierPatient d"
-        + " JOIN Patient p ON d.NISSPatient = p.NISS"
-        + " JOIN Medicament m ON d.DCI = m.DCI"
-        + " WHERE d.dateVente > '"
+        + " FROM DossierPatient d, Patient p, Medicament m"
+        + " WHERE d.NISSPatient = p.NISS"
+        + " AND d.DCI = m.DCI"
+        + " AND d.dateVente > '"
         + str(date)
         + "'"
         + " AND d.NomComMedicament = '"
